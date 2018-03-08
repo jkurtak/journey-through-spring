@@ -1,4 +1,4 @@
-<table style="width: 100%">
+<table align="right" style="width: 100%">
   <tr style="width: 100%">
     <td align="left"><a href="../../"><< Table of Contents</a></td>
     <td align="right"><a href="../../">Spring Boot and Kotlin >></a></td>
