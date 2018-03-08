@@ -4,10 +4,9 @@ Journey Through Spring
 A pragmatic approach to learning the Spring Framework. 
 
 * [What is Spring and Spring Boot](./docs/what-is-spring)
-* [What is Kotlin](./docs/what-is-kotlin)
+* [Spring Boot and Kotlin](./docs/spring-kotlin)
 * [Reference Material](./docs/references)
 * [Getting Started](./docs/getting-started)
-  * [Spring Boot and Kotlin](./docs/getting-started/spring-kotlin)
   * [Installing SDKs and Tools](./docs/getting-started/install-tools)
 * [Spring Basics](./docs/spring-basics)
   * [Understanding the "Magic" of Spring](./docs/spring-basics/magic)
