@@ -1,8 +1,8 @@
-<div align="right">
-    <table style="width: 100%">
-      <tr style="width: 100%">
-        <td align="left"><a href="../../"><< Table of Contents</a></td>
-        <td align="right"><a href="../../">Spring Boot and Kotlin >></a></td>
+<div style="width: 100%; position: absolute; float: right" align="right">
+    <table>
+      <tr>
+        <td><a href="../../"><< Table of Contents</a></td>
+        <td><a href="../../">Spring Boot and Kotlin >></a></td>
       </tr>
     </table>
 </div>
