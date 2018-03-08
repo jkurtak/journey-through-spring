@@ -1,4 +1,4 @@
-<div>
+<div style="margin:0 auto;">
     <div style="float: left"><a href=""><< Table of Contents</a></div>
     <div style="float: right"><a href="">What is Kotlin? >></a></div>
 </div>
