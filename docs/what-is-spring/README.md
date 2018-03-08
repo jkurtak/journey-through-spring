@@ -1,5 +1,6 @@
 <div style="width: 100%">
-  <div align="right"><a href="">Next: What is Kotlin?</a></div>
+  <div align="left"><a href=""><< Table of Contents</a></div>
+  <div align="right"><a href="">What is Kotlin? >></a></div>
 </div>
 
 
