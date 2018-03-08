@@ -3,7 +3,6 @@
   <div align="right"><a href="">What is Kotlin? >></a></div>
 </div>
 
-
 What is Spring?
 ======
 
@@ -19,3 +18,8 @@ Spring Boot unleashes the power of Spring. It takes the concept of convention ov
 
 From [projects.spring.io/spring-boot](https://projects.spring.io/spring-boot/):
 > Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run". We take an opinionated view of the Spring platform and third-party libraries so you can get started with minimum fuss. Most Spring Boot applications need very little Spring configuration.
+
+<div style="width: 100%">
+  <div align="left"><a href=""><< Table of Contents</a></div>
+  <div align="right"><a href="">What is Kotlin? >></a></div>
+</div>
