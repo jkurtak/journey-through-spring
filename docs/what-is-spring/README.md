@@ -1,4 +1,4 @@
-<div style="width: 100%; display: flex; justify-content: space-between;">
+<div style="display: flex; justify-content: space-between;">
   <div><a href="../../"><< Table of Contents</a></div>
   <div><a href="../references">What is Kotlin? >></a></div>
 </div>
