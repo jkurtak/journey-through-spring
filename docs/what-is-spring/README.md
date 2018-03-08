@@ -1,8 +1,7 @@
-| Previous               | Next                                 |
-| ---------------------- |:------------------------------------:|
-| [TOC](../)             | [What is Kotlin?](./what-is-kotlin)  |
-
-<div align="right">Test</div>
+<div>
+    <a align="left" href=""><< Table of Contents</a>
+    <a align="right" href="">What is Kotlin? >></a>
+</div>
 
 What is Spring?
 ======
