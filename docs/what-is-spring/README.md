@@ -1,7 +1,9 @@
-<div style="width: 100%">
-  <a style="width: 50%" align="left"  href="../../"><< Table of Contents</a>
-  <a style="width: 50%" align="right" href="../references">What is Kotlin? >></a>
-</div>
+<table style="width: 100%">
+  <tr>
+    <td align="left"><a href="../../"><< Table of Contents</a></td>
+    <td align="right"><a href="../../">Spring Boot and Kotlin >></a></td>
+  </tr>
+</table>
 
 What is Spring?
 ======
