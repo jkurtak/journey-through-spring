@@ -1,6 +1,6 @@
 <div>
-    <a align="left" href=""><< Table of Contents</a>
-    <a align="right" href="">What is Kotlin? >></a>
+    <a style="float: left" href=""><< Table of Contents</a>
+    <a style="float: right" href="">What is Kotlin? >></a>
 </div>
 
 What is Spring?
