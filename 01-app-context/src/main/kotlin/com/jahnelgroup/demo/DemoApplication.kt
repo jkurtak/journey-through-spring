@@ -1,5 +1,6 @@
 package com.jahnelgroup.demo
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -7,6 +8,7 @@ import org.springframework.boot.runApplication
 import org.springframework.context.ApplicationContext
 
 fun main(args: Array<String>) {
+
     /**
      * This will start the IoC Container and create a Bean of type ApplicationContext along with a
      * few others that you'll notice get printed out when this application runs.
@@ -15,6 +17,7 @@ fun main(args: Array<String>) {
      * defined within that class as well.
       */
     runApplication<DemoApplication>(*args)
+
 }
 
 /**
@@ -32,14 +35,19 @@ class DemoApplication(
 
 ) : ApplicationRunner {
 
+    @Value("#{'Hello World'.concat('!')}")
+    lateinit var hello: String
+
     override fun run(args: ApplicationArguments) {
+        println("=".repeat(100))
+        println(hello)
         println("========================\nPrinting Every Bean\n========================")
         appContext.beanDefinitionNames.forEach { println("Bean: $it") }
 
-        println("=========================\nRetrieving Beans by Name\n=========================")
-        println("This should be steven: ${appContext.getBean("steven")}")
-        println("This should be carrie: ${appContext.getBean("carrie")}")
-        println("This should be Lauren: ${appContext.getBean("yuna")}")
+        println("=========================\nRetrieving Environment\n=========================")
+        println(appContext.environment)
+
+        println("=".repeat(100))
     }
 
 }
