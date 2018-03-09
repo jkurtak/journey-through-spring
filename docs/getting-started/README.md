@@ -37,3 +37,22 @@ Follow these exercises and ignore the part about installing Maven or Gradle.
 
 * **Exercise:** [Building Java Projects with Maven](https://spring.io/guides/gs/maven/)
 * **Exercise:** [Building Java Projects with Gradle](https://github.com/spring-guides/gs-gradle)
+
+### Install Spring Boot Command Line Interface (Spring CLI)
+The Spring Boot CLI is a tool that can help you rapidly prototype applications right from the terminal. It can be used to run Spring-Boot groovy scripts and init your application with the Spring Starter projects. 
+
+Install Spring Boot CLI with SDKMAN.
+
+```bash
+$ sdk install springboot
+```
+
+Follow this quick example to start a groovy web-app instantly from the command-line.
+
+* **Exercise:** [Running Applications with the CLI](https://docs.spring.io/spring-boot/docs/current/reference/html/cli-using-the-cli.html#cli-run)
+
+
+### Install IntelliJ
+[IntelliJ](https://www.jetbrains.com/idea/) has become the standard IDE used by most Java developers, [Eclipse](https://www.eclipse.org/) being the other. 
+
+* **Install:** [Install and set up IntelliJ IDEA](https://www.jetbrains.com/help/idea/install-and-set-up-intellij-idea.html)
