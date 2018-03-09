@@ -48,7 +48,7 @@ Spring provides a few different annotations to drive the creation of beans.
 | @Component     | class    | Instruct Spring to create a Bean out of the class  |
 | @Service       | class    | Same as @Component but Stereotyped as a Service    |
 | @Repository    | class    | Same as @Component but Stereotyped as a Repository |
-| @Controller    | class    | Same as @Component but Stereotyped as a Controller which defines @RequestMappings |
+| @Controller    | class    | Controller Bean which defines @RequestMappings (i.e., REST URLS) |
 
 * **Read:** [Advantages of using spring stereotypes?](https://stackoverflow.com/questions/16051656/advantages-of-using-spring-stereotypes)
 * **Read:** [What's the difference between @Component, @Repository & @Service annotations in Spring?](https://stackoverflow.com/questions/6827752/whats-the-difference-between-component-repository-service-annotations-in)
