@@ -13,6 +13,8 @@ Think of Spring as an intelligent black box that is organized in a special way. 
 From [projects.spring.io/spring-framework](https://projects.spring.io/spring-framework/):
 > The Spring Framework provides a comprehensive programming and configuration model for modern Java-based enterprise applications - on any kind of deployment platform. A key element of Spring is infrastructural support at the application level: Spring focuses on the "plumbing" of enterprise applications so that teams can focus on application-level business logic, without unnecessary ties to specific deployment environments.
 
+* **Read:** [Spring Framework Overview.](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/overview.html#overview)
+
 What is Spring Boot?
 ======
 
@@ -21,4 +23,4 @@ Spring Boot unleashes the power of Spring. It takes the concept of convention ov
 From [projects.spring.io/spring-boot](https://projects.spring.io/spring-boot/):
 > Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run". We take an opinionated view of the Spring platform and third-party libraries so you can get started with minimum fuss. Most Spring Boot applications need very little Spring configuration.
 
-* **Watch:** [Build a Hello World REST Service](https://www.youtube.com/watch?v=47xNBNd-LLI?target=_blank)
+* **Watch:** [Build a Hello World REST Service](https://www.youtube.com/watch?v=47xNBNd-LLI)
