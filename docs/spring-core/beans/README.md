@@ -65,7 +65,7 @@ class HelloController {
 ```
 
 ## Bean Scope and Lifecycle
-The concept of [Scope](https://en.wikipedia.org/wiki/Scope_(computer_science)) is fundamental to computer programming and it’s no surprise that its found in Spring as well. As you delegate the control over the creation of your Objects to Spring you have the ability to advise Spring on its Scope.
+The concept of [Scope](https://en.wikipedia.org/wiki/Scope_(computer_science)) is fundamental to computer programming and it’s no surprise that its found in Spring as well. As you delegate the control over the creation of your Objects to Spring you have the ability to advise Spring on scope.
 
 | Scope               | Description                                                     |
 | ------------------- | --------------------------------------------------------------- |
@@ -81,6 +81,21 @@ The concept of [Scope](https://en.wikipedia.org/wiki/Scope_(computer_science)) i
 
 ### Lifecycle
 As Spring Beans are created they follow a Lifecycle where you can hook-in callback listeners to do interesting things when the Beans are first created and destroyed. 
+
+A common use-case is to validate that certain properties are set on your Bean after it is created.
+
+```kotlin
+@Component
+class ConnectionManager(
+    @Value("\${connection.url}") var url: String = "") {
+
+    @PostConstruct
+    fun init(){
+        Assert.isTrue(!url.isNullOrBlank(), "url must be set")
+        Assert.isTrue(url.startsWith("http://"), "http is the only support protocol")
+    }
+}
+```
 
 * **Read:** [Spring Bean Life Cycle](https://www.thejavaprogrammer.com/spring-bean-life-cycle/)
 
