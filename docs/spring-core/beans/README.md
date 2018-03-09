@@ -113,17 +113,17 @@ The best way to wire you dependencies together are by defining them in your cons
 @Service
 class UserService { /* some code */ }
 
-/* 
- * Spring will create a UserController Bean for you and all the dependencies
- * needed as well (i.e., userService)
- */ 
+/** 
+  * Spring will create a UserController Bean for you and all the dependencies
+  * needed as well (i.e., userService)
+  */ 
 @RestController
 class UserController(
 
-    /* 
-     * Spring will automatically detect that a reference to another Bean 
-     * called userService is required and inject it here for you. 
-     */ 
+    /** 
+      * Spring will automatically detect that a reference to another Bean 
+      * called userService is required and inject it here for you. 
+      */ 
     var userService: UserService
   
 ){
@@ -154,7 +154,7 @@ class UserControllerTest{
     }
 
     @Test
-    fun `test my`(){
+    fun `findUserById should invoke userService to retrieve the user`(){
         Mockito.`when`(userService.findById(Mockito.any(Long::class.java)))
           .thenReturn(User(1, "Fake User"))
         
@@ -194,7 +194,37 @@ class UserController{
 }
 ```
 
-> [lateinit](https://kotlinlang.org/docs/reference/properties.html#late-initialized-properties-and-variables) is a Kotlin construct and is confusing for those new using the language with Spring. This is required because Kotlin is very strict with Null Safety checking. There is a short period of time where the userService property will actually be null, refer back to the Spring Bean Lifecycle section to learn more. Spring will first create your object and then use reflection immediately after to inject these properties, lateinit essentially tells Kotin to ignore the Null safety checks for this reference. 
+> [lateinit](https://kotlinlang.org/docs/reference/properties.html#late-initialized-properties-and-variables) is a Kotlin construct and is confusing for those new using the language with Spring. This is required because Kotlin is very strict with Null safety checking. There is a short period of time where the userService property will actually be null, refer back to the Spring Bean Lifecycle section to learn more. Spring will first create your Object and then use reflection immediately after to inject these properties, lateinit essentially tells Kotin to ignore the Null safety checks for this reference. 
+
+Testing code written this way is much harder because you really don't have a good clean way to override the value with a Mock. There are two general approaches to this - define another bean as the @Primary and override it in the ApplicationContext, or using Mockito and the @InjectMocks annotation.
+
+#### Mocking @Autowired Properties with @Primary
+TODO.
+
+#### Mocking @Autowired Properties with Mockito @InjectMocks
+
+```kotlin
+@SpringBootTest
+@RunWith(SpringRunner::class)
+class MyTest{
+
+    @Mock
+    lateinit var userService: UserService
+
+    @InjectMocks
+    lateinit var userController: UserController
+
+    @Test
+    fun `test`(){
+        Mockito.`when`(userService.findById(Mockito.any(Long::class.java)))
+          .thenReturn(User(1, "Fake User"))
+          
+        // continue with test
+        var fakeUser: User = userController.findUserById(1);
+    }
+
+}
+```
 
 ### Retrieve from ApplicationContext
 
