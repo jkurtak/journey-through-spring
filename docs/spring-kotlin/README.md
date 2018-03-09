@@ -1,9 +1,4 @@
-<table>
-  <tr>
-    <td><a href="../what-is-spring"><< What is Spring?</a></td>
-    <td><a href="../references">Reference Material >></a></td>
-  </tr>
-</table>
+<table><tr><td><a href="https://github.com/JahnelGroup/journey-through-spring">Table of Contents</a></td></tr></table>
 
 What is Kotlin?
 ======
