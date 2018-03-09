@@ -48,17 +48,23 @@ Spring provides a few different annotations to drive the creation of beans.
 * **Read:** [Difference...]()
 
 ```kotlin
-// Creates a Singleton Bean out of this class
+// Declare a Singleton Bean - one instance for the entire application
 @Component
 class UserTransformer { }
 
+// Declare a Request Scope Bean - one instance per Web Request
 @Component
-class UserContext { }
+@Scope("request")
+class UserRequestContext { }
 
+// Declare a class that defines definition of Beans
 @Configuration
 class MyConfig {
 
-  @Bean fun userService() = UserService()
+  // Declare a Session Scope Bean - one instance per Web Session
+  @Bean 
+  @Scope("session")
+  fun userSessionContext() = UserSessionContext()
 
 }
 
