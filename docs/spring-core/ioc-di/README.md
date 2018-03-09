@@ -31,6 +31,47 @@ When you start the IoC Container it will scan your application from the current 
 
 * **Read:** [Additional Capabilities of the ApplicationContext](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#context-introduction)
 
-* **Read:** []()
+## Beans
+Objects are the key element in Java programming and the Spring Framework handles them in a very special way. Unlike a regular Java Object that is created with the new operator and then used, a Spring Object must be registered with the ApplicationContext first. When an Object is registered with the ApplicationContext it is referred to as a [Bean](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-definition) (or “Managed Bean” or “Component”). When Spring manages an Object as a Bean it is creating a Proxy around your object and can do very interesting things with it.
+
+### Bean Configuration
+Beans can be configured in three primary ways: XML, Java, or Annotations. We focus primarily on Annotation based configuration.
+
+* **Read:** [Annotation-based container configuration](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-annotation-config)
+
+Spring provides a few different annotations to drive the creation of beans.
+
+* Component
+* Service
+* Repository
+
+* **Read:** [Difference...]()
+
+```kotlin
+// Creates a Singleton Bean out of this class
+@Component
+class UserTransformer { }
+
+@Component
+class UserContext { }
+
+@Configuration
+class MyConfig {
+
+  @Bean fun userService() = UserService()
+
+}
+
+// Declares a Bean with the Service stereotype
+@Service
+class UserService { }
+
+// Declares a Bean with the Repository stereotype
+@Repository
+class UserRepository { }
+
+
+```
+
 * **Read:** []()
 * **Read:** []()
