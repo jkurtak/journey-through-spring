@@ -15,3 +15,5 @@ Kotlin started with the Android community and solves many problems that exist in
 * **Read:** [What is Kotlin? The Java alternative explained](https://www.infoworld.com/article/3224868/java/what-is-kotlin-the-java-alternative-explained.html)
 * **Read:** [Using Kotlin for Server-side Development](https://kotlinlang.org/docs/reference/server-overview.html)
 * **Read:** [Comparison to Java Programming Language](https://kotlinlang.org/docs/reference/comparison-to-java.html)
+
+This journey will focus primarily on Spring Boot and the example code will be written in Kotlin.
