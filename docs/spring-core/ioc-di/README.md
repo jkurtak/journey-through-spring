@@ -33,3 +33,6 @@ When you start the IoC Container it will scan your application from the current 
 
 ## Dependency Injection
 TODO
+
+* **Watch:** ]Understanding Spring Bean Factory](https://www.youtube.com/watch?v=xlWwMSu5I70)
+* **Watch:** [Understanding Dependency Injection](https://www.youtube.com/watch?v=GB8k2-Egfv0&t=493s)
