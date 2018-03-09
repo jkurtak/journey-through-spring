@@ -2,7 +2,7 @@
 
 Beans
 ======
-Objects are the key element in Java programming and the Spring Framework handles them in a very special way. Unlike a regular Java Object that is created with the new operator and then used, a Spring Object must be registered with the ApplicationContext first. When an Object is registered with the ApplicationContext it is referred to as a [Bean](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-definition) (or “Managed Bean” or “Component”). When Spring manages an Object as a Bean it is creating a Proxy around your object and can do very interesting things with it.
+Objects are the key element in Java programming and the Spring Framework handles them in a very special way. Unlike a regular Java Object that is created with the **new** operator and then used, a Spring Object must be registered with the ApplicationContext first. When an Object is registered with the ApplicationContext it is referred to as a [Bean](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-definition) (or “Managed Bean” or “Component”). When Spring manages an Object as a Bean it is creating a Proxy around your object and can do very interesting things with it.
 
 ## Bean Configuration
 Beans can be configured in three primary ways: XML, Java, or Annotations. We focus primarily on Annotation based configuration.
@@ -120,23 +120,49 @@ class UserService { /* some code */ }
 @RestController
 class UserController(
 
-  /* 
-   * Spring will automatically detect that a reference to another Bean 
-   * called userService is required and inject it here for you. 
-   */ 
-  var userService: UserService
+    /* 
+     * Spring will automatically detect that a reference to another Bean 
+     * called userService is required and inject it here for you. 
+     */ 
+    var userService: UserService
   
 ){
-
-  @RequestMapping("/user/{id}")
-  fun findUserById(@RequestParam id: Long) = userService.findById(id) // now you can use it in your class
+    @RequestMapping("/user/{id}")
+    fun findUserById(@RequestParam id: Long) = userService.findById(id) // now you can use it in your class
 }
 ```
 
 Now to test the UserController you could easily Mock out the UserService.
 
 ```kotlin
-// TODO: Add test code
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mockito
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.junit4.SpringRunner
+
+@SpringBootTest
+@RunWith(SpringRunner::class)
+class UserControllerTest{
+
+    lateinit var userController
+
+    @Before fun setup() {
+      // easily inject a fake mock of the UserService
+      userController = new UserController(Mockito.mock(UserService::class.java))
+    }
+
+    @Test
+    fun `test my`(){
+        Mockito.`when`(userService.findById(Mockito.any(Long::class.java)))
+          .thenReturn(new User(1, "Fake User"))
+        
+        // continue with test
+        var fakeUser: User = userController.findUserById(1);
+    }
+
+}
 ```
 
 ### Property Injection with @Autowired
