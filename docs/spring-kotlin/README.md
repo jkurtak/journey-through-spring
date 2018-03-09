@@ -1,7 +1,7 @@
 <table>
   <tr>
     <td><a href="../what-is-spring"><< What is Spring?</a></td>
-    <td><a href="../">Reference Material >></a></td>
+    <td><a href="../references">Reference Material >></a></td>
   </tr>
 </table>
 
