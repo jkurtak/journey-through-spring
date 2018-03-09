@@ -21,4 +21,4 @@ Spring Boot unleashes the power of Spring. It takes the concept of convention ov
 From [projects.spring.io/spring-boot](https://projects.spring.io/spring-boot/):
 > Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run". We take an opinionated view of the Spring platform and third-party libraries so you can get started with minimum fuss. Most Spring Boot applications need very little Spring configuration.
 
-* **Watch:** [Build a Hello World REST Service](https://www.youtube.com/watch?v=47xNBNd-LLI)
+* **Watch:** <a href="https://www.youtube.com/watch?v=47xNBNd-LLI" target="_blank">Build a Hello World REST Service</a>
