@@ -26,8 +26,7 @@ The Spring Framework ecosystem is large and overwhelming at a first glance. Befo
 | [Spring Boot Reference](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) | Primary reference material for Spring Boot       |
 | [Spring Data JPA Reference](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/)           | Primary reference material for Spring Data JPA  |
 
-Source Code & Sample Code
-### Staying Up-To-Date
+### Source Code & Sample Code
 | Link                       | Description                                               |
 | -------------------------- | --------------------------------------------------------- |
 | https://start.spring.io    | Spring Initializr  |
