@@ -150,13 +150,13 @@ class UserControllerTest{
 
     @Before fun setup() {
       // easily inject a fake mock of the UserService
-      userController = new UserController(Mockito.mock(UserService::class.java))
+      userController = UserController(Mockito.mock(UserService::class.java))
     }
 
     @Test
     fun `test my`(){
         Mockito.`when`(userService.findById(Mockito.any(Long::class.java)))
-          .thenReturn(new User(1, "Fake User"))
+          .thenReturn(User(1, "Fake User"))
         
         // continue with test
         var fakeUser: User = userController.findUserById(1);
@@ -166,8 +166,35 @@ class UserControllerTest{
 ```
 
 ### Property Injection with @Autowired
+The favored alternative to constructor injection is property level injection. This approach illustrates a lot more of the Spring magic because it's using reflection to discover properties of your class that need to be provided by Spring. Surprising to many people it can even inject **private** properties into your class. 
 
 * **Read:** [Dangers of Field Injection](http://vojtechruzicka.com/field-dependency-injection-considered-harmful/)
+
+```kotlin
+@Service
+class UserService { /* some code */ }
+
+/* 
+ * Spring will create a UserController Bean for you and all the dependencies
+ * needed as well (i.e., userService)
+ */ 
+@RestController
+class UserController{
+
+    /* 
+     * Spring will use reflection to detect that this property is a reference to 
+     * another Bean called userService and inject it here for you directly after 
+     * the UserController is initialized by Spring. 
+     */ 
+    @Autowired
+    lateinit var userService: UserService
+
+    @RequestMapping("/user/{id}")
+    fun findUserById(@RequestParam id: Long) = userService.findById(id) // now you can use it in your class
+}
+```
+
+> [lateinit](https://kotlinlang.org/docs/reference/properties.html#late-initialized-properties-and-variables) is a Kotlin construct and is confusing for those new using the language with Spring. This is required because Kotlin is very strict with Null Safety checking. There is a short period of time where the userService property will actually be null, refer back to the Spring Bean Lifecycle section to learn more. Spring will first create your object and then use reflection immediately after to inject these properties, lateinit essentially tells Kotin to ignore the Null safety checks for this reference. 
 
 ### Retrieve from ApplicationContext
 
