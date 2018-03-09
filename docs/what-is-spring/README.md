@@ -1,7 +1,7 @@
 <table>
   <tr>
     <td><a href="https://github.com/JahnelGroup/journey-through-spring">TOC</a></td>
-    <td><a href="../../">Spring Boot and Kotlin >></a></td>
+    <td><a href="../spring-kotlin">Spring Boot and Kotlin >></a></td>
   </tr>
 </table>
 
