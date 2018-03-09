@@ -20,6 +20,8 @@ A Java Classloader is the essential component that literally loads your classes 
 #### Resources
 Spring will scan the resources (non-class files) on the classpath and make decisions on things. Two good examples of this are detecting the presence of properties and automatically loading them into your program, or detecting SQL files and automatically seeding your database for you. Features like this are constanting being added to make the development experience more efficient.
 
+* **Read:** [Resources](https://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/html/resources.html#resources)
+
 ## Reflection and Annotations
 Spring relies heavily on Reflection to do almost everything. 
 
