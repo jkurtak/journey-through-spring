@@ -75,12 +75,14 @@ The concept of [Scope](https://en.wikipedia.org/wiki/Scope_(computer_science)) i
 | session             | A new instance is created once per user web session (web-aware) |
 | application         | A new instance is created once per ServletContext (web-aware)   |
 | websocket           | A new instance is created once per WebSocket (web-aware)        |
-| <custom>            | It is possible to define your own scope rules                   |
+| *<custom>*          | It is possible to define your own scope rules                   |
 
 * **Read:** [Bean Scopes](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-factory-scopes)
 
 ### Lifecycle
 As Spring Beans are created they follow a Lifecycle where you can hook-in callback listeners to do interesting things when the Beans are first created and destroyed. 
+
+* **Read:** [Spring Bean Life Cycle](https://www.thejavaprogrammer.com/spring-bean-life-cycle/)
 
 A common use-case is to validate that certain properties are set on your Bean after it is created.
 
@@ -97,7 +99,22 @@ class ConnectionManager(
 }
 ```
 
-* **Read:** [Spring Bean Life Cycle](https://www.thejavaprogrammer.com/spring-bean-life-cycle/)
+## Accessing Beans with Dependency Injection
+Once your Beans are registered with the ApplicationContext you need a way to retrieve them and this is done through Dependency Injection. Spring provides several ways to accomplish this but we tend to use one of these techniques: constructor, property, or directly from the ApplicationContext.
+
+**Important:** Dependency Injection is completely Spring managed, that is you *get Beans from other Beans*. The whole concept is that you retrieve a Bean from the Spring ApplicationContext and it's the containers job to construct and wire the dependencies into your Bean before giving it back to you. 
+
+If you're creating a component via the **new** operator then it is "unmanaged" and Spring is unaware of it
+
+
+You inject Beans into other Beans, so 
+
+### Constructor Injection
+The best way to wire you dependencies together are by defining them in your con
+
+### Property Injection with @Autowired
+
+### Retrieve from ApplicationContext
 
 ## Exercises
 Try out these exercises to get a feel for the Application Context and declaring Beans.
