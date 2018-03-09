@@ -2,7 +2,7 @@
 
 Spring Boot is Extreme Programming
 ======
-We cannot deny that Spring has a learn curve but once you’re over the hump it is all about making the developer more efficient. It is designed to give a developer the ability to deliver software rapidly. 
+We cannot deny that Spring has a learning curve but once you’re over the hump it is all about making the developer more efficient. It is designed to give a developer the ability to deliver software rapidly. 
 
 ## Spring Boot Starters
 Spring Boot developers have created “starters” that are a slightly different concept from “seed projects”. A seed-project consists of a codebase that has been either generated or hand-coded to be the base of your application. They usually come in the form a github repository that you fork and start from. Spring Starters however are just like regular dependencies that you’d pull into your application and are kind of hidden from the rest of your program. These starters are built upon the auto-configuration feature discussed above in the Understanding the “Magic” of Spring section. Their code is ran when the application starts up and they will create Beans, start Web Servlets, establish connection pooling to a database, and do many more things. 
