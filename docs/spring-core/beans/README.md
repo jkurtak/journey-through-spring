@@ -102,15 +102,34 @@ class ConnectionManager(
 ## Accessing Beans with Dependency Injection
 Once your Beans are registered with the ApplicationContext you need a way to retrieve them and this is done through Dependency Injection. Spring provides several ways to accomplish this but we tend to use one of these techniques: constructor, property, or directly from the ApplicationContext.
 
-**Important:** Dependency Injection is completely Spring managed, that is you *get Beans from other Beans*. The whole concept is that you retrieve a Bean from the Spring ApplicationContext and it's the containers job to construct and wire the dependencies into your Bean before giving it back to you. 
-
-If you're creating a component via the **new** operator then it is "unmanaged" and Spring is unaware of it
-
-
-You inject Beans into other Beans, so 
+> **Important:** Dependency Injection is completely Spring managed, that is you *get Beans from other Beans*. The whole concept is that you retrieve a Bean from the Spring ApplicationContext and it's the containers job to construct and wire the dependencies into your Bean before giving it back to you. If you're creating a component via the **new** operator then it is "unmanaged" and Spring is unaware of it so any Spring constructs defined in your class will not work at all.
 
 ### Constructor Injection
-The best way to wire you dependencies together are by defining them in your con
+The best way to wire you dependencies together are by defining them in your constructor. 
+
+```kotlin
+@Service
+class UserService { /* some code */ }
+
+/* 
+ * Spring will create a UserController Bean for you and all the dependencies
+ * needed as well (i.e., userService)
+ */ 
+@RestController
+class UserController(
+
+  /* 
+   * Spring will automatically detect that a reference to another Bean 
+   * called userService is required and inject it here for you. 
+   */ 
+  var userService: UserService
+  
+){
+
+  @RequestMapping("/user/{id}")
+  fun findUserById(@RequestParam id: Long) = userService.findById(id) // now you can use it in your class
+}
+```
 
 ### Property Injection with @Autowired
 
