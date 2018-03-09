@@ -1,1 +1,33 @@
-README
+<table><tr><td><a href="https://github.com/JahnelGroup/journey-through-spring">Table of Contents</a></td></tr></table>
+
+Understanding the “Magic” of Spring
+======
+
+## Installing Tools and Knowing their Versions
+You’ll often hear people refer to Spring as being complicated or difficult to learn. Spring is referred to as “magic” because its abilities at times seem impossible - until you look behind the curtain and understand what’s going on! Here are a few of the major features cthat Spring takes advantage of for it’s so-called magic.
+
+### Auto-configuration: Classloader and Resource Management
+Spring Boot introduced the concept of [Auto-configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-auto-configuration.html) which greatly reduced the learning of Spring. It leverages existing Java technology such as the Classloader and Resource Bundler to perform analysis on “what is present in the application” and make decisions based on it. For example if you have a MySQL Driver in your application then you’ll probably be connecting to a MySQL database so the auto-configuration will set that up for you. If you have Tomcat dependencies then you’ll probably be starting up a Tomcat container so the auto-configuration will do that for you. 
+
+Auto-configuration is not just restricted to Spring developers, it is available for everyone to create their own Auto-configuration libraries to make their own “magic” happen automatically. 
+
+### Classloader
+A Java Classloader is the essential component that literally loads your classes into the JVM. Using this concept Spring can take advantage of knowing what’s present in your program (“on the classpath”) and make intelligent decisions about how and what to run. 
+
+* **Read:** [Java Classpath](https://en.wikipedia.org/wiki/Classpath_(Java))
+* **Read:** [Java Classloader](https://en.wikipedia.org/wiki/Java_Classloader)
+
+### Resources
+Spring will scan the resources (non-class files) on the classpath and make decisions on things. Two good examples of this are detecting the presence of properties and automatically loading them into your program, or detecting SQL files and automatically seeding your database for you. Features like this are constanting being added to make the development experience more efficient.
+
+## Reflection and Annotations
+Spring relies heavily on Reflection to do almost everything. 
+
+* **Read:** [Java Reflection Example Tutorial](https://www.journaldev.com/1789/java-reflection-example-tutorial)
+* **Read:** [Call Methods at Runtime Using Java Reflection](http://www.baeldung.com/java-method-reflection)
+
+[Annotations](https://en.wikipedia.org/wiki/Java_annotation) have evolved to be the standard way we provide “advice” to our Java programs. Spring uses annotations in place of external configuration files to drive the “wiring” of components. 
+
+
+* **Read:** [Lesson: Annotations](https://docs.oracle.com/javase/tutorial/java/annotations/)
+* **Read:** [Spring Framework Annotations](https://springframework.guru/spring-framework-annotations/)
