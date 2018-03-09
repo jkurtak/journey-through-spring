@@ -41,17 +41,21 @@ Beans can be configured in three primary ways: XML, Java, or Annotations. We foc
 
 Spring provides a few different annotations to drive the creation of beans.
 
-| Annotation     | Location | Description                                        |
-| -------------- | -------- | -------------------------------------------------- |
-| @Configuration | class    | Indicates that this class defines @Bean's to be    |
-| @Bean          | method   | Creates a Bean from the return value of the method |
-| @Component     | class    | Instruct Spring to create a Bean out of the class  |
-| @Service       | class    | Same as @Component but Stereotyped as a Service    |
-| @Repository    | class    | Same as @Component but Stereotyped as a Repository |
-| @Controller    | class    | Controller Bean which defines @RequestMappings (i.e., REST URLS) |
+| Annotation      | Location | Description                                            |
+| --------------- | -------- | ------------------------------------------------------ |
+| @Configuration  | class    | Indicates that this class defines @Bean's to be        |
+| @Bean           | method   | Creates a Bean from the return value of the method     |
+| @Component      | class    | Instruct Spring to create a Bean out of the class      |
+| @Service        | class    | Same as @Component but Stereotyped as a Service        |
+| @Repository     | class    | Same as @Component but Stereotyped as a Repository     |
+| @Controller     | class    | Controller Bean which defines @RequestMappings for MVC |
+| @RestController | class    | Same as @Controller but meant REST end-points          |
 
 * **Read:** [Advantages of using spring stereotypes?](https://stackoverflow.com/questions/16051656/advantages-of-using-spring-stereotypes)
 * **Read:** [What's the difference between @Component, @Repository & @Service annotations in Spring?](https://stackoverflow.com/questions/6827752/whats-the-difference-between-component-repository-service-annotations-in)
+* **Read:** [Difference between spring @Controller and @RestController annotation
+](https://stackoverflow.com/questions/25242321/difference-between-spring-controller-and-restcontroller-annotation)
+* **Read:** [@RestController vs @Controller](https://www.genuitec.com/spring-frameworkrestcontroller-vs-controller/)
 
 ```kotlin
 // Declare a Singleton Bean - one instance for the entire application
@@ -82,6 +86,11 @@ class UserService { }
 @Repository
 class UserRepository { }
 
+@RestController
+class HelloController {
+  @RequestMapping("/hello")
+  fun hello() = "Hello, World!"
+}
 
 ```
 
