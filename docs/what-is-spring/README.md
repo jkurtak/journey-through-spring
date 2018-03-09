@@ -1,5 +1,9 @@
-<div style="text-align: right"> your-text-here </div>
-
+<table>
+  <tr>
+    <td><a href="https://github.com/JahnelGroup/journey-through-spring">TOC</a></td>
+    <td><a href="../../">Spring Boot and Kotlin >></a></td>
+  </tr>
+</table>
 
 What is Spring?
 ======
