@@ -1,9 +1,4 @@
-<table>
-  <tr>
-    <td><a href="../spring-kotlin"><< References</a></td>
-    <td><a href="../spring-magic">Understanding the "Magic" of Spring >></a></td>
-  </tr>
-</table>
+<table><tr><td><a href="https://github.com/JahnelGroup/journey-through-spring">Table of Contents</a></td></tr></table>
 
 Getting Started
 ======
