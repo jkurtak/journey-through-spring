@@ -10,7 +10,7 @@ A pragmatic approach to learning the Spring Framework.
 * [Getting Started](./docs/getting-started)
 * [Understanding the "Magic" of Spring](./docs/spring-magic)
 * [Spring Boot Starters and Extreme Programming](./docs/spring-extreme)
-* [Spring Core](./docs/spring-core)
+* Spring Core
   * [Inversion of Control (IOC) and Dependency Injection (DI)](./docs/spring-core/ioc-di)
   * [Beans](./docs/spring-core/beans)
   * [Properties, Profiles and Resources](./docs/spring-core/prop-profile-resources)
