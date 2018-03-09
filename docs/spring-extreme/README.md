@@ -11,7 +11,7 @@ Spring Boot developers have created “starters” that are a slightly different
 * **Read:** [Intro to Spring Boot Starters](http://www.baeldung.com/spring-boot-starters)
 
 ## Spring Boot Executable “fat Jar”
-A “fat Jar” or “Uber Jar” is a single Jar file that contains everything needed to run an application. The most powerful thing to realize here is that you can actually run a Spring Boot jar file and it will start up a Web Container from within the Jar file. You would normally have to deploy your application into a separate Tomcat server but with Spring Boot the Tomcat server is actually running within Spring!
+A “fat Jar” or “Uber Jar” is a single Jar file that contains everything needed to run an application. The most powerful thing to realize here is that you can actually run a Spring Boot jar file and it will start up a Web Container from within the Jar file. You would normally have to deploy your application into a separate Webserver but with Spring Boot the Webserver is actually running within the Jar file!
 
 This concept extends to other components like H2, Elasticsearch, Redis, etc. This is great for rapid development but eventually when a product matures we will change the architecture to be more production-like with external services. It’s all about getting up and running as fast as possible in the beginning. 
 
