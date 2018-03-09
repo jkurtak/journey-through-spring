@@ -65,9 +65,24 @@ class HelloController {
 ```
 
 ## Bean Scope and Lifecycle
+The concept of [Scope](https://en.wikipedia.org/wiki/Scope_(computer_science)) is fundamental to computer programming and it’s no surprise that its found in Spring as well. As you delegate the control over the creation of your Objects to Spring you have the ability to advise Spring on its Scope.
 
-* **Read:** []()
-* **Read:** []()
+| Scope               | Description                                                     |
+| ------------------- | --------------------------------------------------------------- |
+| singleton **(default)** | A single instance is created                                    |
+| prototype           | A new instance is created each time the bean is referenced      |
+| request             | A new instance is created once per web request (web-aware)      |
+| session             | A new instance is created once per user web session (web-aware) |
+| application         | A new instance is created once per ServletContext (web-aware)   |
+| websocket           | A new instance is created once per WebSocket (web-aware)        |
+| <custom>            | It is possible to define your own scope rules                   |
+
+* **Read:** [Bean Scopes](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-factory-scopes)
+
+### Lifecycle
+As Spring Beans are created they follow a Lifecycle where you can hook-in callback listeners to do interesting things when the Beans are first created and destroyed. 
+
+* **Read:** [Spring Bean Life Cycle](https://www.thejavaprogrammer.com/spring-bean-life-cycle/)
 
 ## Exercises
 Try out these exercises to get a feel for the Application Context and declaring Beans.
