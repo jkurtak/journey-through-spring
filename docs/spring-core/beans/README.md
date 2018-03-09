@@ -64,7 +64,7 @@ class HelloController {
 
 ```
 
-## Bean Scope and Lifecycle
+## Bean Scope
 The concept of [Scope](https://en.wikipedia.org/wiki/Scope_(computer_science)) is fundamental to computer programming and it’s no surprise that its found in Spring as well. As you delegate the control over the creation of your Objects to Spring you have the ability to advise Spring on scope.
 
 | Scope               | Description                                                     |
@@ -79,7 +79,7 @@ The concept of [Scope](https://en.wikipedia.org/wiki/Scope_(computer_science)) i
 
 * **Read:** [Bean Scopes](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-factory-scopes)
 
-### Lifecycle
+## Bean Lifecycle
 As Spring Beans are created they follow a Lifecycle where you can hook-in callback listeners to do interesting things when the Beans are first created and destroyed. 
 
 * **Read:** [Spring Bean Life Cycle](https://www.thejavaprogrammer.com/spring-bean-life-cycle/)
@@ -105,7 +105,9 @@ Once your Beans are registered with the ApplicationContext you need a way to ret
 > **Important:** Dependency Injection is completely Spring managed, that is you *get Beans from other Beans*. The whole concept is that you retrieve a Bean from the Spring ApplicationContext and it's the containers job to construct and wire the dependencies into your Bean before giving it back to you. If you're creating a component via the **new** operator then it is "unmanaged" and Spring is unaware of it so any Spring constructs defined in your class will not work at all.
 
 ### Constructor Injection
-The best way to wire you dependencies together are by defining them in your constructor. 
+The best way to wire you dependencies together are by defining them in your constructor. The reason this is favored is because it's very obvious what your dependencies are. Additionally it makes it easy to Unit Test your code because you have the ability to inject Mocks into the constructor. 
+
+* **Read:** [Explain why constructor inject is better than other options](https://stackoverflow.com/questions/21218868/explain-why-constructor-inject-is-better-than-other-options)
 
 ```kotlin
 @Service
@@ -131,7 +133,15 @@ class UserController(
 }
 ```
 
+Now to test the UserController you could easily Mock out the UserService.
+
+```kotlin
+// TODO: Add test code
+```
+
 ### Property Injection with @Autowired
+
+* **Read:** [Dangers of Field Injection](http://vojtechruzicka.com/field-dependency-injection-considered-harmful/)
 
 ### Retrieve from ApplicationContext
 
