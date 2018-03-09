@@ -11,13 +11,13 @@ Spring Boot introduced the concept of [Auto-configuration](https://docs.spring.i
 
 Auto-configuration is not just restricted to Spring developers, it is available for everyone to create their own Auto-configuration libraries to make their own “magic” happen automatically. 
 
-### Classloader
+#### Classloader
 A Java Classloader is the essential component that literally loads your classes into the JVM. Using this concept Spring can take advantage of knowing what’s present in your program (“on the classpath”) and make intelligent decisions about how and what to run. 
 
 * **Read:** [Java Classpath](https://en.wikipedia.org/wiki/Classpath_(Java))
 * **Read:** [Java Classloader](https://en.wikipedia.org/wiki/Java_Classloader)
 
-### Resources
+#### Resources
 Spring will scan the resources (non-class files) on the classpath and make decisions on things. Two good examples of this are detecting the presence of properties and automatically loading them into your program, or detecting SQL files and automatically seeding your database for you. Features like this are constanting being added to make the development experience more efficient.
 
 ## Reflection and Annotations
