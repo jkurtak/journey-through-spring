@@ -12,3 +12,5 @@ Kotlin started with the Android community and solves many problems that exist in
 * **Read:** [Comparison to Java Programming Language](https://kotlinlang.org/docs/reference/comparison-to-java.html)
 
 This journey will focus primarily on Spring Boot and the example code will be written in Kotlin.
+
+* **Read:** [Introducing Kotlin support in Spring Framework 5.0](https://spring.io/blog/2017/01/04/introducing-kotlin-support-in-spring-framework-5-0)
