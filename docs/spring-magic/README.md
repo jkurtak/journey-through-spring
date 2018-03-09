@@ -46,3 +46,5 @@ You will learn how Spring manages your code as components called Beans (or “Ma
 Spring Beans and the Proxy role they play in your application is the center stage in the Spring “magic show”. 
 
 * **Watch:** [Understanding Spring Bean Factory](https://www.youtube.com/watch?v=xlWwMSu5I70)
+* **Read:** [Understanding Proxy Usage In Spring](https://spring.io/blog/2012/05/23/transactions-caching-and-aop-understanding-proxy-usage-in-spring)
+* **Read:** [Debunking Myths Proxies Impact Performance](https://spring.io/blog/2007/07/19/debunking-myths-proxies-impact-performance/)
