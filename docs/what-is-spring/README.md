@@ -1,11 +1,4 @@
-<div style="width: 100%; position: absolute; float: right" align="right">
-    <table>
-      <tr>
-        <td><a href="../../"><< Table of Contents</a></td>
-        <td><a href="../../">Spring Boot and Kotlin >></a></td>
-      </tr>
-    </table>
-</div>
+<div style="text-align: right"> your-text-here </div>
 
 
 What is Spring?
