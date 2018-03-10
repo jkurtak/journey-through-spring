@@ -28,7 +28,33 @@ System.out.println("Hello, World!");
 **Kotlin**
 ```kotlin
 println("Hello, World!")
-```    
+``` 
 
-#### Instantiating Objects
-In Java we use the **new** keyword to instantiate an Object, but it does not exist in 
+### Type Inference
+Both Java and Kotlin are considered strict static languages but Kotlin has type inference. This means if the compiler can determine the type of a reference without a doubt then you can omit it. Also the type is defined on the right side of the variable name instead of the left.
+
+**Java**
+```java
+Integer num = 1;
+String str = "Hello";
+```    
+**Kotlin**
+```kotlin
+var num = 1
+var str: String = "Hello"
+```
+
+### Instantiating Objects
+In Java we use the **new** keyword to instantiate an Object, but that does not exist in Kotlin so we simply omit it. 
+
+**Java**
+```java
+User user = new User(1, "Steven");
+```    
+**Kotlin**
+```kotlin
+var user = User(1, "Steven")
+```
+
+### Declaring Classes
+TODO.... 
