@@ -283,8 +283,59 @@ class MyTest{
 ### Retrieve from ApplicationContext
 This approach is typically used when you are dynamically interacting with Beans during runtime, in other words you're unsure of which Bean you need so you need to look it up. For example if you're processing requests and need a corresponding transformer for different types of requests you wouldn't want to inject a reference to every type of transformer.
 
+Let's define a few types of tranformers:
 
+```kotlin
+interface BrowserTransformer{
+    fun transform(inbound: String): String
+}
 
+@Component class ChromeTransformer : BrowserTransformer {
+    override fun transform(inbound: String): String = "Chrome:".plus(inbound)
+}
+
+@Component class FirefoxTransformer : BrowserTransformer{
+    override fun transform(inbound: String): String = "Firefox:".plus(inbound)
+}
+
+@Component class IETransformer : BrowserTransformer{
+    override fun transform(inbound: String): String = "IE:".plus(inbound)
+}
+```
+
+Now you can retrieve them directly through the ApplicationContext:
+
+```kotlin
+@SpringBootApplication
+class DemoApplication(var appContext: AbstractApplicationContext) : ApplicationRunner{
+    override fun run(args: ApplicationArguments?) {
+
+        var xform = appContext.getBean("firefoxTransformer", BrowserTransformer::class.java)
+        println(xform.transform("Hello"))
+    }
+
+}
+
+@RestController
+class HelloController(var appContext: AbstractApplicationContext) {
+  @RequestMapping("/echo")
+  fun echo(str: String){
+    var userAgent = getUserAgent()
+    
+    // this will get the corresponding bean based on its name
+    var xform = appContext.getBean("${userAgent}Transformer", BrowserTransformer::class.java)
+    
+    return xform.transform(str)
+  }
+  
+  fun getUserAgent(): String {
+    // assume this code will return the String: "IE", "firefox", or "chrome"
+  }
+}
+
+```
+
+Testing code written this way can only be done by shadowing the original bean with @Primary in a TestConfig. 
 
 ## Exercises
 Try out these exercises to get a feel for the Application Context and declaring Beans.
