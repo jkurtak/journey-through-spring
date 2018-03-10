@@ -281,6 +281,10 @@ class MyTest{
 ```
 
 ### Retrieve from ApplicationContext
+This approach is typically used when you are dynamically interacting with Beans during runtime, in other words you're unsure of which Bean you need so you need to look it up. For example if you're processing requests and need a corresponding transformer for different types of requests you wouldn't want to inject a reference to every type of transformer.
+
+
+
 
 ## Exercises
 Try out these exercises to get a feel for the Application Context and declaring Beans.
