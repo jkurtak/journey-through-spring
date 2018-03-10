@@ -317,7 +317,8 @@ class DemoApplication(var appContext: AbstractApplicationContext) : ApplicationR
 }
 
 @RestController
-class HelloController(var appContext: AbstractApplicationContext) {
+class EchoController(var appContext: AbstractApplicationContext) {
+  
   @RequestMapping("/echo")
   fun echo(str: String){
     var userAgent = getUserAgent()
@@ -331,6 +332,7 @@ class HelloController(var appContext: AbstractApplicationContext) {
   fun getUserAgent(): String {
     // assume this code will return the String: "IE", "firefox", or "chrome"
   }
+  
 }
 
 ```
