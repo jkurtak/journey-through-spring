@@ -196,7 +196,7 @@ class UserController{
 }
 ```
 
-> [lateinit](https://kotlinlang.org/docs/reference/properties.html#late-initialized-properties-and-variables) is a Kotlin construct and is confusing for those new using the language with Spring. This is required because Kotlin is very strict with Null safety checking. There is a short period of time where the userService property will actually be null, refer back to the Spring Bean Lifecycle section to learn more. Spring will first create your Object and then use reflection immediately after to inject these properties, lateinit essentially tells Kotin to ignore the Null safety checks for this reference. 
+> [lateinit](https://kotlinlang.org/docs/reference/properties.html#late-initialized-properties-and-variables) is a Kotlin construct and is confusing for those new using the language with Spring. This is required because Kotlin is very strict with null safety checking. There is a short period of time where the userService property will actually be null, refer back to the Spring Bean Lifecycle section to learn more. Spring will first create your Object and then use reflection immediately after to inject these properties, lateinit essentially tells Kotin to ignore the null safety checks for this reference. 
 
 Testing code written this way is much harder because you really don't have a good clean way to override the value with a Mock. There are two general approaches to this - define another bean as the @Primary and override it in the ApplicationContext, or using Mockito and the @InjectMocks annotation.
 
@@ -220,18 +220,18 @@ class MyTest{
       * This is now needed to define another Bean of the same type and mark it
       * as @Primary which essentially shadows the original one. 
       */
-	  class TestConfig {
-		  @Bean
-		  @Primary
-		  fun userService() = Mockito.mock(UserService::class.java)
-	  }
+    class TestConfig {
+      @Bean
+      @Primary
+      fun userService() = Mockito.mock(UserService::class.java)
+    }
 
     /**
       * Now we have to rely on Spring to provide us references to test so we
       * inject them here. This is a big step away from "unit" testing. 
       */ 
-	  @Autowired lateinit var userService: UserService
-	  @Autowired lateinit var userController: UserController
+    @Autowired lateinit var userService: UserService
+    @Autowired lateinit var userController: UserController
 
     @Test
     fun `test with mock primary bean`(){
@@ -246,6 +246,15 @@ class MyTest{
 ```
 
 #### Mocking @Autowired Properties with Mockito @InjectMocks
+Mockito can eliminate that nasty bit of code TestConfig using @Mock and @InjectMocks. The concept is same as with @Primary but instead of letting Spring inject the Beans into your test class you let Mockito do it. 
+
+* **@Mock** - Is just like Mockito.mock(..) but registers the Mock to be used with @InjectMocks
+* **@InjectMocks** - Is just like @Autowired but Mockito will swap out any beans with their matching Mocks declared by @Mock
+
+Although powerful this approach can be a little dangerous. 
+
+* **Read:** [@Mock and @InjectMocks](https://stackoverflow.com/questions/16467685/difference-between-mock-and-injectmocks)
+* **Read:** [Why You Should Not Use InjectMocks Annotation to Autowire Fields](https://tedvinke.wordpress.com/2014/02/13/mockito-why-you-should-not-use-injectmocks-annotation-to-autowire-fields/)
 
 ```kotlin
 @RunWith(SpringRunner::class)
