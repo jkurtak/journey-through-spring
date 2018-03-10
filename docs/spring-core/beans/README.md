@@ -203,7 +203,7 @@ Testing code written this way is much harder because you really don't have a goo
 #### Mocking @Autowired Properties with @Primary
 The [@Primary](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/annotation/Primary.html) annotation allows you to define multiple beans of the same and give Spring a hint at deciding which one to choice by default if no [@Qualifier](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/beans/factory/annotation/Qualifier.html) is used. 
 
-For testing this allows you to shadow a Bean in your application with a Mock. In order to this you need to define a test configuration and load up another Bean of the exact same type and name. 
+This allows you to shadow a Bean in your application with a Mock. In order to do this you need to define a test configuration and load up another Bean of the exact same type and name. 
 
 ```kotlin
 /**
@@ -246,13 +246,14 @@ class MyTest{
 ```
 
 #### Mocking @Autowired Properties with Mockito @InjectMocks
-Mockito can eliminate that nasty bit of code TestConfig using @Mock and @InjectMocks. The concept is same as with @Primary but instead of letting Spring inject the Beans into your test class you let Mockito do it. 
+Mockito can eliminate that nasty bit of TestConfig code using @Mock and @InjectMocks. The concept is same as with @Primary but instead of letting Spring inject the Beans into your test class you let Mockito do it. 
 
 * **@Mock** - Is just like Mockito.mock(..) but registers the Mock to be used with @InjectMocks
 * **@InjectMocks** - Is just like @Autowired but Mockito will swap out any beans with their matching Mocks declared by @Mock
 
 Although powerful this approach can be a little dangerous. 
 
+* **Read:** [Getting Started with Mockito @Mock, @Spy, @Captor and @InjectMocks](http://www.baeldung.com/mockito-annotations)
 * **Read:** [@Mock and @InjectMocks](https://stackoverflow.com/questions/16467685/difference-between-mock-and-injectmocks)
 * **Read:** [Why You Should Not Use InjectMocks Annotation to Autowire Fields](https://tedvinke.wordpress.com/2014/02/13/mockito-why-you-should-not-use-injectmocks-annotation-to-autowire-fields/)
 
