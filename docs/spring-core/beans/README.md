@@ -75,7 +75,7 @@ The concept of [Scope](https://en.wikipedia.org/wiki/Scope_(computer_science)) i
 | session             | A new instance is created once per user web session (web-aware) |
 | application         | A new instance is created once per ServletContext (web-aware)   |
 | websocket           | A new instance is created once per WebSocket (web-aware)        |
-| *<custom>*          | It is possible to define your own scope rules                   |
+| *\<custom>*          | It is possible to define your own scope rules                   |
 
 * **Read:** [Bean Scopes](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-factory-scopes)
 
@@ -142,8 +142,8 @@ import org.mockito.Mockito
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
 
-@SpringBootTest
 @RunWith(SpringRunner::class)
+@SpringBootTest
 class UserControllerTest{
 
     lateinit var userController
@@ -154,7 +154,7 @@ class UserControllerTest{
     }
 
     @Test
-    fun `findUserById should invoke userService to retrieve the user`(){
+    fun `easy test because of constructor injection`(){
         Mockito.`when`(userService.findById(Mockito.any(Long::class.java)))
           .thenReturn(User(1, "Fake User"))
         
@@ -167,6 +167,8 @@ class UserControllerTest{
 
 ### Property Injection with @Autowired
 The favored alternative to constructor injection is property level injection. This approach illustrates a lot more of the Spring magic because it's using reflection to discover properties of your class that need to be provided by Spring. Surprising to many people it can even inject **private** properties into your class. 
+
+This approach is very convenient in our class but things change dramatically when you want to test it.   
 
 * **Read:** [Dangers of Field Injection](http://vojtechruzicka.com/field-dependency-injection-considered-harmful/)
 
@@ -199,13 +201,55 @@ class UserController{
 Testing code written this way is much harder because you really don't have a good clean way to override the value with a Mock. There are two general approaches to this - define another bean as the @Primary and override it in the ApplicationContext, or using Mockito and the @InjectMocks annotation.
 
 #### Mocking @Autowired Properties with @Primary
-TODO.
+The [@Primary](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/annotation/Primary.html) annotation allows you to define multiple beans of the same and give Spring a hint at deciding which one to choice by default if no [@Qualifier](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/beans/factory/annotation/Qualifier.html) is used. 
+
+For testing this allows you to shadow a Bean in your application with a Mock. In order to this you need to define a test configuration and load up another Bean of the exact same type and name. 
+
+```kotlin
+/**
+  * Since we're declaring a new Configuration file just for testing we have to make 
+  * the Spring test loader aware of it by refering to it in this annotation. Notice 
+  * that you have also include your main class because once your declare the classes
+  * attribute it overides the location of all configuration files!
+  */ 
+@SpringBootTest(classes = [DemoApplication::class, MyTest.TestConfig::class])
+@RunWith(SpringRunner::class)
+class MyTest{
+
+    /**
+      * This is now needed to define another Bean of the same type and mark it
+      * as @Primary which essentially shadows the original one. 
+      */
+	  class TestConfig {
+		  @Bean
+		  @Primary
+		  fun userService() = Mockito.mock(UserService::class.java)
+	  }
+
+    /**
+      * Now we have to rely on Spring to provide us references to test so we
+      * inject them here. This is a big step away from "unit" testing. 
+      */ 
+	  @Autowired lateinit var userService: UserService
+	  @Autowired lateinit var userController: UserController
+
+    @Test
+    fun `test with mock primary bean`(){
+        Mockito.`when`(userService.findById(Mockito.any(Long::class.java)))
+          .thenReturn(User(1, "Fake User"))
+          
+        // continue with test
+        var fakeUser: User = userController.findUserById(1);
+    }
+
+}
+```
 
 #### Mocking @Autowired Properties with Mockito @InjectMocks
 
 ```kotlin
-@SpringBootTest
 @RunWith(SpringRunner::class)
+@SpringBootTest
 class MyTest{
 
     @Mock
