@@ -4,6 +4,7 @@ Journey Through Spring
 
 A pragmatic approach to learning the Spring Framework. 
 
+* [The Journey](./docs/the-journey)
 * [What is Spring and Spring Boot](./docs/what-is-spring)
 * [Spring Boot and Kotlin](./docs/spring-kotlin)
 * [Reference Material](./docs/references)
@@ -15,5 +16,15 @@ A pragmatic approach to learning the Spring Framework.
   * [Beans](./docs/spring-core/beans)
   * [Properties, Profiles and Resources](./docs/spring-core/prop-profile-resources)
   * [Events](./docs/spring-core/events)
+  * Validation
+  * Data Binding
+  * Type Conversion
   * [Spring Expression Language (SpEL)](./docs/spring-core/spel)
   * [Aspect Oriented Programming (AOP)](./docs/spring-core/aop)
+* Testing with Spring
+* Accessing Data with Spring
+* Spring for the Web
+  * Spring MVC
+  * RESTful Spring
+  * Handling Web Errors
+* Scheduling, Caching, Retry
