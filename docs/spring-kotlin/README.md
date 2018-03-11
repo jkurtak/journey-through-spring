@@ -15,10 +15,10 @@ This journey will focus primarily on Spring Boot and the example code will be wr
 * **Read:** [Comparison to Java Programming Language](https://kotlinlang.org/docs/reference/comparison-to-java.html)
 * **Read:** [Introducing Kotlin support in Spring Framework 5.0](https://spring.io/blog/2017/01/04/introducing-kotlin-support-in-spring-framework-5-0)
 
-## Main Differences from Java
+## Highlight a few differences from Java
 If you're new to Kotlin here are a few main differences from Java that will help you follow along in this Journey.
 
-### Semicolons
+### Optional Semicolons
 Semicolons are optional.
 
 **Java**
@@ -56,5 +56,29 @@ User user = new User(1, "Steven");
 var user = User(1, "Steven")
 ```
 
-### Declaring Classes
-TODO.... 
+### Class Declaration 
+The two things to be aware of are how you declare *inheritance* and *constructors*.
+
+* **Read:** [Classes and Inheritance](https://kotlinlang.org/docs/reference/classes.html)
+
+#### Inheritance 
+In Java we have the **extends** and **implements** keywords for class and interfaces respectively, but that does not exist in Kotlin so we use a colon **:** after the class name for both. Kotlin is still single inheritance so if you're extending a class it must the first one in the list.
+
+```kotlin
+// extends AbstractParentClass and implements MyInterface1, MyInterface2
+class ChildClass : AbstractParentClass, MyInterface1, MyInterface2 { }
+
+// implements MyInterface1
+class ChildClass : MyInterface1 { }
+```
+
+#### Constructors
+Kotlin can have one primary and one or more secondary constructors. The primary constructor comes directly after the name of the class.
+
+```kotlin
+class User(firstName: String) { }
+
+class User(firstName: String) : UserService {
+  constructor(firstName: String, lastName: String) : this(firstName) { }
+}
+```
