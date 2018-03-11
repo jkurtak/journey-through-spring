@@ -14,7 +14,7 @@ var message: String = (String) exp.getValue()
 println(message) // prints "Hello World!"
 ```
 
-Here is an example doing the same thing with an annotation. SpEL is trigger with syntax **#{ } **.
+Here is an example doing the same thing with an annotation. SpEL is trigger with syntax **#{ }**.
 
 ```kotlin
 @Component
