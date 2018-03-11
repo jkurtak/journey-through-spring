@@ -65,7 +65,13 @@ class HelloController {
 ```
 
 ## Bean Scope
-The concept of [Scope](https://en.wikipedia.org/wiki/Scope_(computer_science)) is fundamental to computer programming and it’s no surprise that its found in Spring as well. As you delegate the control over the creation of your Objects to Spring you have the ability to advise Spring on scope.
+The concept of [Scope](https://en.wikipedia.org/wiki/Scope_(computer_science)) is fundamental to computer programming and it’s no surprise that its found in Spring as well. As you delegate the control over the creation of your Objects to Spring you have the ability to advise Spring on scope with @Scope.
+
+```kotlin
+@Component
+@Scope("request")
+class UserRequestContext { }
+```
 
 | Scope               | Description                                                     |
 | ------------------- | --------------------------------------------------------------- |
