@@ -78,8 +78,10 @@ class ChildClass : MyInterface1 { }
 Kotlin can have one primary and one or more secondary constructors. The primary constructor comes directly after the name of the class.
 
 ```kotlin
+// single primary constructor
 class User(firstName: String) { }
 
+// primary constructor and one secondary constructor
 class User(firstName: String) : UserService {
   constructor(firstName: String, lastName: String) : this(firstName) { }
 }
