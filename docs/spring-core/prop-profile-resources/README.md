@@ -46,15 +46,9 @@ Profiles work very nicely with the properties mentioned earlier. Spring will loa
 
 A common example of this is externalizing database connection property for each envirionment.
 
-**application.properties**
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/mydb
-```
-**application-DEV.properties**
-```properties
-spring.datasource.url=jdbc:mysql://dev-database.app.com:3306/mydb
-```
-**application-PROD.properties**
-```properties
-spring.datasource.url=jdbc:mysql://prod-database.app.com:3306/mydb
-```
+* src/main/resources/application.properties
+  * spring.datasource.url=jdbc:mysql://localhost:3306/mydb
+* src/main/resources/application-DEV.properties
+  * spring.datasource.url=jdbc:mysql://dev-database.app.com:3306/mydb
+* src/main/resources/application-PROD.properties
+  * spring.datasource.url=jdbc:mysql://prod-database.app.com:3306/mydb
