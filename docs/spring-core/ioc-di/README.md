@@ -32,7 +32,9 @@ When you start the IoC Container it will scan your application from the current 
 * **Read:** [Additional Capabilities of the ApplicationContext](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#context-introduction)
 
 ## Dependency Injection
-TODO
+Dependency Injection is a technique used to achieve Inversion of Control and sounds more sophisticated than it really is. If *Object A* depends on *Object B* then a reference will be provided ("injected") from an external source (i.e., the ApplicationContext). If *Object A* creates *Object B* on it's own then it is not Dependency Injection. 
 
-* **Watch:** ]Understanding Spring Bean Factory](https://www.youtube.com/watch?v=xlWwMSu5I70)
+In Spring we achieve this by creating [Beans](../beans) and establishing their relationship in a few different ways. The two most common are through [Constructor Injection](../beans#constructor-injection) or [Property Injection](../beans#property-injection-with-autowired). 
+
+* **Watch:** [Understanding Spring Bean Factory](https://www.youtube.com/watch?v=xlWwMSu5I70)
 * **Watch:** [Understanding Dependency Injection](https://www.youtube.com/watch?v=GB8k2-Egfv0&t=493s)
