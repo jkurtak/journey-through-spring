@@ -3,10 +3,12 @@
 Properties, Profiles and Resources
 ======
 
-## Externalized Configuration
+## Properties
 You’ll likely need to change the behavior of your application based on a number of things. Spring has a lot features around this called Externalized Configuration - the practice of placing configuration in property files as opposed to hard-coded in your program. Spring will respect a very specific hierarchical order of properties such that you can override properties when required.  
 
 * **Read:** [Externalized Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html)
+* **Read:** [Properties and Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-properties-and-configuration.html)
+* **Read:** [Properties with Spring and Spring Boot](http://www.baeldung.com/properties-with-spring)
 * **Read:** [Appendix A. Common application properties](https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html)
 
 Property files are typically placed in **src/main/resources** as either *.properties* or *.yml* files. **application.properties** and **application.yml** are specially named properties that Spring will look for to load automatically when your application starts. There are profile-specific variants of these property files as well and are described below. 
@@ -15,6 +17,7 @@ Property files are typically placed in **src/main/resources** as either *.proper
 Spring has the concept of a Profile which is basically a special type of property that you can use to *tag* your components to a specific environment. Let’s say you have a service that should send an EMail out when certain events happen in your system. This may only be relevant in an environment like UAT and PROD but not in DEV. You could define two types of MailService, one to actually send the EMail out and the other to just print it to the console.
 
 * **Read:** [Profiles](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-profiles.html)
+* **Read:** [Spring Profiles](http://www.baeldung.com/spring-profiles)
 
 ```kotlin
 /** 
@@ -52,3 +55,6 @@ A common example of this is externalizing database connection property for each 
   * spring.datasource.url=jdbc:mysql://dev-database.app.com:3306/mydb
 * src/main/resources/application-PROD.properties
   * spring.datasource.url=jdbc:mysql://prod-database.app.com:3306/mydb
+  
+## Resources
+TODO.
