@@ -57,4 +57,18 @@ A common example of this is externalizing database connection property for each 
   * spring.datasource.url=jdbc:mysql://prod-database.app.com:3306/mydb
   
 ## Resources
+Resources are non source-code related files required by your application. The Properties described above are considered resources. SQL Files, CSV, XLS images, bundled HTML/CSS/JS and others would also be considered resources for a Spring application. Spring will make resources from your classpath available to you, and it will automatically make **src/main/resources** part of your classpath. 
+
+### Some Important Specially Named Resources
+All of these are located in src/main/resources.
+
+| File                          | Description          |
+| ----------------------------- | -------------------- |
+| application.\[properties|yml] | Described in the above Properties section. |
+| schema.sql                    | [Initialize a Database](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-initialize-a-database-using-spring-jdbc) simple database DDL ERD. |
+| data.sql                      | [Initialize a Database](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-initialize-a-database-using-spring-jdbc) simple database seed script. |
+| db/migrations/V*.sql          | [Execute Flyway Database Migrations on Startup](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-execute-flyway-database-migrations-on-startup) |
+| banner.txt                    | [Customize the Banner](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-banner) that displays when Spring starts up. | 
+
+### Access Resources in your Code
 TODO.
