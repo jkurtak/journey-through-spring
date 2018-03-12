@@ -17,12 +17,15 @@ Spring provides a class called [ApplicationEvent](https://docs.spring.io/spring-
 With the except of extending ApplicationEvent for best practice, the event class it self should just be a plain old java object, nothing fancy, just a wrapper of data. 
 
 ```kotlin
-// Raised when a new user signs up for our system.
-class UserSignedUpEvent(
-        userId: Long,
-        username: String,
-        email: String) 
-    : ApplicationEvent(userId)
+// Model of a simple User 
+data class User(
+        var id: Long = 0L,
+        var username: String = "",
+        var email: String = ""
+)
+
+// Event to be raised when a new user signs up
+class UserSignedUpEvent(user: User) : ApplicationEvent(user)
 ```
 
 ### Raising Events with ApplicationEventPublisher
@@ -46,6 +49,19 @@ class UserService(
 ```
 
 ### Listening for Events
+
+```kotlin
+@Service
+class EmailService {
+
+    @EventListener
+    fun sendWelcomeEmail(userSignedUpEvent: UserSignedUpEvent){
+        var user = userSignedUpEvent.source as User
+        // send out the email
+    }
+
+}
+```
 
 ### Debugging Events
 TODO.
