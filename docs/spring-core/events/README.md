@@ -10,4 +10,20 @@ The concept of [Events](https://en.wikipedia.org/wiki/Event_(computing)) is fund
 * **Read:** [Spring Events](http://www.baeldung.com/spring-events)
 * **Read:** [Standard and Custom Events](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#context-functionality-events)
 
+## ApplicationEvent
+Spring provides a class called [ApplicationEvent](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/ApplicationEvent.html) to faciliate the processing of events. Your events do not need to extend this class but it is good practice. Its constructor takes a single argument of type Object which is intended to be the *source* of the event. 
+
+* **Read:** [Spring ApplicationEvent Support](https://docs.spring.io/spring-integration/reference/html/applicationevent.html)
 TODO - demonstrate.
+
+### Events are POJO's
+With the except of extending ApplicationEvent for best practice, the event class it self should just be a plain old java object, nothing fancy, just a wrapper of data. 
+
+```kotlin
+// Raised when a new user signs up for our system.
+class UserSignedUpEvent(
+        userId: Long,
+        username: String,
+        email: String) 
+    : ApplicationEvent(userId)
+```
