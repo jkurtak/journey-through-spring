@@ -87,9 +87,9 @@ class EmailService {
 ```
 
 ## Async Events
-**Spring Events are synchronous by default!** This something comes as a shock to people but you must realize that making something automatically async is actually quite dangerous. Just because an Event adds loose coupling to your components does me it can change the processing behavior. 
+**Spring Events are synchronous by default!** This something comes as a shock to people but you must realize that making something automatically async is actually quite dangerous. 
 
-You can easily make an EventListener by using the [@Async](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/annotation/Async.html) annotation. Be warned though that there is more to this little annotation and you should understand how it works before using it. 
+You can easily make an EventListener asynchronous by using the [@Async](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/annotation/Async.html) annotation. Be warned though that there is more to this little annotation and you should understand how it works before using it. 
 
 * **Read:** [Asynchronous Listeners](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#context-functionality-events-async)
 * **Read:** [Spring Async](http://www.baeldung.com/spring-async)
@@ -97,7 +97,7 @@ You can easily make an EventListener by using the [@Async](https://docs.spring.i
 ## Transactionl Events
 Transactions are discussed in another section but it's important to understand that they play a role with EventListeners. You have the abilitiy to advise Spring on when and how to run your listeners with respect to transaction that may be going on. To do this you essentially swap out @EventListener with [@TransactionalEventListener](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/event/TransactionalEventListener.html). 
 
-An example of this is would be a MailService listener that should send a welcome E-Mail out only after a user has successfully be commited to the database.
+An example of this is would be a MailService listener that should send a welcome E-Mail out only after a user has successfully been commited to the database.
 
 * [Understanding @TransactionalEventListener](https://dzone.com/articles/transaction-synchronization-and-spring-application)
 * [Better application events in Spring Framework 4.2](https://spring.io/blog/2015/02/11/better-application-events-in-spring-framework-4-2)
