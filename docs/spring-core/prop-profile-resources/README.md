@@ -71,4 +71,41 @@ All of these are located in src/main/resources.
 | banner.txt                    | [Customize the Banner](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-banner) that displays when Spring starts up. | 
 
 ### Access Resources in your Code
-TODO.
+Spring can inject Resources for you quite easily. Here is an example of printing a text file line-by-line.
+
+**src/main/resources/printMe.txt**
+```text
+Line 1
+Line 2
+etc...
+```
+
+```kotlin
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
+import org.springframework.core.io.Resource
+import javax.annotation.PostConstruct
+
+@SpringBootApplication
+class DemoApplication{
+
+    /**
+      * Spring is doing a couple of things here to make this magic happen. It detects
+      * the injection type to be a Resource so it knows its a file. The @Value annotation
+      * is a URI pointing to a file named one.txt located in the root of the classpath.
+      * You can then get a File reference from the Resource.      
+      */
+    @Value("\${classpath:one.txt}") var one: Resource? = null
+
+    @PostConstruct
+    fun init(){
+        one!!.file.readLines().forEach { println(it) }
+    }
+
+}
+
+fun main(args: Array<String>) {
+    runApplication<DemoApplication>(*args)
+}
+```
