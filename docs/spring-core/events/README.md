@@ -13,9 +13,6 @@ The concept of [Events](https://en.wikipedia.org/wiki/Event_(computing)) is fund
 ## ApplicationEvent
 Spring provides a class called [ApplicationEvent](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/ApplicationEvent.html) to faciliate the processing of events. Your events do not need to extend this class but it is good practice. Its constructor takes a single argument of type Object which is intended to be the *source* of the event. 
 
-* **Read:** [Spring ApplicationEvent Support](https://docs.spring.io/spring-integration/reference/html/applicationevent.html)
-TODO - demonstrate.
-
 ### Events are POJO's
 With the except of extending ApplicationEvent for best practice, the event class it self should just be a plain old java object, nothing fancy, just a wrapper of data. 
 
@@ -27,3 +24,43 @@ class UserSignedUpEvent(
         email: String) 
     : ApplicationEvent(userId)
 ```
+
+### Raising Events with ApplicationEventPublisher
+Spring provides a convenient means to raise events with [ApplicationEventPubliser](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/ApplicationEventPublisher.html). Inject this into any location where you need to raise events and call publish!
+
+```kotlin
+@Component
+class UserService(
+        var userRepo: UserRepository,
+        var appEventPublisher: ApplicationEventPublisher){
+
+    /**
+      * Creates and saves a new user to the database, after succeeding it will
+      * raise the UserSignedUpEvent for other interested components to react. 
+      */ 
+    fun register(username:String, email:String){
+        var user = userRepo.save(User(username, email))
+        applicationEventPublisher.publishEvent(UserSignedUpEvent(user))
+    }
+}
+```
+
+### Listening for Events
+
+### Debugging Events
+TODO.
+
+## Async Events
+TODO.
+
+## Transactionl Events
+TODO.
+
+## Domain Events with Spring Data AbstractAggregateRoot
+TODO.
+
+## Spring Integration
+We cover Spring Integration in another section but it's important to know that it has support for listening to Spring ApplicationEvents with a component called [ApplicationEventListeningMessageProducer](https://docs.spring.io/spring-integration/api/org/springframework/integration/event/inbound/ApplicationEventListeningMessageProducer.html).
+
+* **Read:** [Spring ApplicationEvent Support](https://docs.spring.io/spring-integration/reference/html/applicationevent.html)
+TODO - demonstrate.
