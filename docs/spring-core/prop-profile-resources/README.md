@@ -82,6 +82,7 @@ etc...
 
 This short piece of code is instructing Spring to inject a reference to the classpath resource and then using some neat Kotlin extension functions to iterate over it. The key point here is the @Value injection of a Resource to get a reference to the File. 
 
+**src/main/kotlin/DemoApplication.kt**
 ```kotlin
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -95,16 +96,13 @@ class DemoApplication{
     /**
       * Spring is doing a couple of things here to make this magic happen. It detects
       * the injection type to be a Resource so it knows its a file. The @Value annotation
-      * is a URI pointing to a file named one.txt located in the root of the classpath.
+      * is a URI pointing to a file named printMe.txt located in the root of the classpath.
       * You can then get a File reference from the Resource.      
       */
-    @Value("\${classpath:one.txt}") var one: Resource? = null
+    @Value("\${classpath:printMe.txt}") var printMe: Resource? = null
 
-    @PostConstruct
-    fun init(){
-        one!!.file.readLines().forEach { println(it) }
-    }
-
+    // Prints the File line by line
+    @PostConstruct fun init() = printMe!!.file.readLines().forEach { println(it) }
 }
 
 fun main(args: Array<String>) {
