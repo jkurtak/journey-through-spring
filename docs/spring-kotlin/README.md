@@ -30,6 +30,9 @@ System.out.println("Hello, World!");
 println("Hello, World!")
 ``` 
 
+### Null Safety
+The most infamous exception in Java is the [NullPointerException](https://stackoverflow.com/questions/218384/what-is-a-nullpointerexception-and-how-do-i-fix-it). It happens very often and the problem with Java is that it does almost nothing to help you avoid them. Kotlin has taken a very defensive approach to **null** and actually makes you declare if a reference can potentially be null. 
+
 ### Type Inference
 Both Java and Kotlin are considered strict static languages but Kotlin has type inference. This means if the compiler can determine the type of a reference without a doubt then you can omit it. Also the type is defined on the right side of the variable name instead of the left.
 
