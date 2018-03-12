@@ -80,6 +80,8 @@ Line 2
 etc...
 ```
 
+This short piece of code is instructing Spring to inject a reference to the classpath resource and then using some neat Kotlin extension functions to iterate over it. The key point here is the @Value injection of a Resource to get a reference to the File. 
+
 ```kotlin
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
