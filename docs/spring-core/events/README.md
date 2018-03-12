@@ -13,6 +13,15 @@ The concept of [Events](https://en.wikipedia.org/wiki/Event_(computing)) is fund
 ## ApplicationEvent
 Spring provides a class called [ApplicationEvent](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/ApplicationEvent.html) to faciliate the processing of events. Your events do not need to extend this class but it is good practice. Its constructor takes a single argument of type Object which is intended to be the *source* of the event. 
 
+### What are good Events?
+An event *source* is the Object for which the event is trigger against. For example, say you want to send an E-Mail to every user that signs up for your system. The event would be something like *UserSignedUpEvent* and the source would be the *User* object.
+
+Events are things that *have happened* and they are past tense. UserLoggedInEvent states that a user has already logged in and you're being notified of the fact. Do not use events in place of direct method invocation, that's not the idea. They are more about a change to the conceptual design of your application and building a set of components that react to each other in a choreographed way.
+
+**Read: * [Orchestration vs. Choreography
+](https://stackoverflow.com/questions/4127241/orchestration-vs-choreography)
+**Read: * [Scaling Microservices with an Event Stream](https://www.thoughtworks.com/insights/blog/scaling-microservices-event-stream)
+
 ### Events are POJO's
 With the except of extending ApplicationEvent for best practice, the event class it self should just be a plain old java object, nothing fancy, just a wrapper of data. 
 
