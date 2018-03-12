@@ -49,7 +49,21 @@ class UserService(
 ```
 
 ### Listening for Events
+You can listen for events by either implementing the [ApplicationListener](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/ApplicationListener.html) interface or by annotation. As always don't forget that you class must be a Bean or else Spring will not have any control over it (here we are defining @Service).
 
+Either approach is fine but the interface implementation makes it a bit more obvious and easier to search on. 
+
+#### ApplicationListener Interface
+```kotlin
+@Service
+class EmailService : ApplicationListener<UserSignedUpEvent> {
+    override fun onApplicationEvent(event: UserSignedUpEvent) {
+        var user = userSignedUpEvent.source as User
+        // send out the email
+    }
+}
+```
+#### @EventListener Annotation
 ```kotlin
 @Service
 class EmailService {
