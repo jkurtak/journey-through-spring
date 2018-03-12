@@ -58,7 +58,7 @@ class UserService(
 ```
 
 ### Listening for Events
-You can listen for events by either implementing the [ApplicationListener](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/ApplicationListener.html) interface or by annotation. As always don't forget that you class must be a Bean or else Spring will not have any control over it (here we are defining @Service).
+You can listen for events by either implementing the [ApplicationListener](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/ApplicationListener.html) interface or by the [@EventListener](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/event/EventListener.html) annotation. As always don't forget that you class must be a Bean or else Spring will not have any control over it (here we are defining @Service).
 
 Either approach is fine but the interface implementation makes it a bit more obvious and easier to search on. 
 
@@ -86,13 +86,32 @@ class EmailService {
 }
 ```
 
-### Debugging Events
-TODO.
-
 ## Async Events
-TODO.
+**Spring Events are synchronous by default!** This something comes as a shock to people but you must realize that making something automatically async is actually quite dangerous. Just because an Event adds loose coupling to your components does me it can change the processing behavior. 
+
+You can easily make an EventListener by using the [@Async](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/annotation/Async.html) annotation. Be warned though that there is more to this little annotation and you should understand how it works before using it. 
+
+* **Read:** [Asynchronous Listeners](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#context-functionality-events-async)
+* **Read:** [Spring Async](http://www.baeldung.com/spring-async)
 
 ## Transactionl Events
+Transactions are discussed in another section but it's important to understand that they play a role with EventListeners. You have the abilitiy to advise Spring on when and how to run your listeners with respect to transaction that may be going on. To do this you essentially swap out @EventListener with [@TransactionalEventListener](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/event/TransactionalEventListener.html). 
+
+An example of this is would be a MailService listener that should send a welcome E-Mail out only after a user has successfully be commited to the database.
+
+* [Understanding @TransactionalEventListener](https://dzone.com/articles/transaction-synchronization-and-spring-application)
+* [Better application events in Spring Framework 4.2](https://spring.io/blog/2015/02/11/better-application-events-in-spring-framework-4-2)
+
+## Ordering of Event Listeners
+Ordering things is a rather interesting concept with Spring. When you register multiple things of the same type into the (depending on what it is...) Spring will generally store them as a list **in the order that there detected by Spring during component scanning.** You have a number of ways to advise Spring on the Order of components but the most abstract approach is to use an [@Order](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/core/annotation/Order.html) annotation.  
+
+* **Read:** [Ordering listeners](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#context-functionality-events-order)
+* **Read:** [What is the use of @Order annotation in Spring?
+](https://stackoverflow.com/questions/30328897/what-is-the-use-of-order-annotation-in-spring)
+* **Read:** [Spring Order Annotation](https://javapapers.com/spring/spring-order-annotation/)
+* **Read:** [Controlling Beans Loading Order](https://www.logicbig.com/tutorials/spring-framework/spring-core/using-depends-on.html)
+
+### Debugging Events
 TODO.
 
 ## Domain Events with Spring Data AbstractAggregateRoot
