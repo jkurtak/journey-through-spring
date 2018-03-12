@@ -32,4 +32,4 @@ This journey is lightweight on purpose with a lot of external references. It is 
   * Spring MVC
   * RESTful Spring
   * Handling Web Errors
-* Scheduling, Caching, Retry
+* Async, Scheduling, Caching, Retry
