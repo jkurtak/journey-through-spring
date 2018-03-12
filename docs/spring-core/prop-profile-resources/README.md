@@ -64,9 +64,9 @@ All of these are located in src/main/resources.
 
 | File                          | Description          |
 | ----------------------------- | -------------------- |
-| application.\[properties|yml] | Described in the above Properties section. |
-| schema.sql                    | [Initialize a Database](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-initialize-a-database-using-spring-jdbc) simple database DDL ERD. |
-| data.sql                      | [Initialize a Database](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-initialize-a-database-using-spring-jdbc) simple database seed script. |
+| application.\[properties\|yml] | Described in the above Properties section. |
+| schema.sql                    | [Initialize a Database](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-initialize-a-database-using-spring-jdbc) with simple DDL script. |
+| data.sql                      | [Initialize a Database](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-initialize-a-database-using-spring-jdbc) with simple seed script. |
 | db/migrations/V*.sql          | [Execute Flyway Database Migrations on Startup](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-execute-flyway-database-migrations-on-startup) |
 | banner.txt                    | [Customize the Banner](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-banner) that displays when Spring starts up. | 
 
