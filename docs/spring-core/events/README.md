@@ -127,21 +127,25 @@ Ordering things is a rather interesting concept with Spring. When you register m
 ## Spring Data - Domain Events with @DomainEvents and AbstractAggregateRoot
 [Spring Data](http://projects.spring.io/spring-data/) is one of the foundational projects that many other Spring projects are based on. We'll cover it deeper in another section but there is a really neat feature built-in releated to events.
 
-Spring Data follows the concept of [Domain Driven Design ](https://en.wikipedia.org/wiki/Domain-driven_design) and has a concept called Domain Events. Essentially if you have a managed Entity (a special kinda of Bean related to persistence) then Spring Data will look for a field annotated with [@DomainEvents](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/DomainEvents.html) and **automatically publishethose events for you when that Entity is acted upon**. Spring Data provided a convenient super class for you to extend with this functionality called [AbstractAggregateRoot](https://github.com/spring-projects/spring-data-commons/blob/master/src/main/java/org/springframework/data/domain/AbstractAggregateRoot.java). 
+Spring Data follows the concept of [Domain Driven Design ](https://en.wikipedia.org/wiki/Domain-driven_design) and has a concept called Domain Events. Essentially if you have a managed Entity (a special kinda of Bean related to persistence) then Spring Data will look for a field annotated with [@DomainEvents](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/DomainEvents.html) and **automatically publish those events for you when that Entity is acted upon**. Spring Data provides a convenient super class for you to extend with this functionality called [AbstractAggregateRoot](https://github.com/spring-projects/spring-data-commons/blob/master/src/main/java/org/springframework/data/domain/AbstractAggregateRoot.java). 
 
 * **Read:** [Domain event publication from aggregate roots](https://spring.io/blog/2017/01/30/what-s-new-in-spring-data-release-ingalls#domain-event-publication-from-aggregate-roots)
 * **Read:** [Publishing domain events from aggregate roots](http://zoltanaltfatter.com/2017/06/09/publishing-domain-events-from-aggregate-roots/)
 
-Let's take an example where you've modeled a bidding system where people can **Bid** on an **Auction**. I'm going to omit all the JPA annotations for simplicity and showcase the DomainEvents only.
+Take an example where you've modeled a bidding system where people can **Bid** on an **Auction**. I'm going to omit all the JPA annotations for simplicity and showcase the DomainEvents only.
 
-Let's define two interesting events:
+> You can see an entire application built with this on our github page called [jgBay](https://github.com/JahnelGroup/sample-applications/tree/master/jgBay).
+
+Here are two interesting events:
 
 ```kotlin
 class BidRemovedEvent(auction: Auction, var bid: Bid): AuctionEvent(auction)
 class BidAddedEvent(auction: Auction, var bid: Bid): AuctionEvent(auction)
 ```
 
-We'll show only the **Auction** class because it has the interesting piece of code related to events. The 
+Notice although we're adding and removing Bids that the event is actually raised against an Auction. This is because in our modeling the Auction is the [Aggregate](https://martinfowler.com/bliki/DDD_Aggregate.html). 
+
+Here is the **Auction** with the interesting piece of code related to events. 
 
 ```kotlin
 /**
@@ -178,17 +182,18 @@ data class Auction : AbstractAggregateRoot(){
 }
 ```
 
-Now let's define a Controller to call these methods at the appropriate time. 
+Here is an example use of these methods with a Controller. 
 
 ```kotlin
 @RestController
 @RequestMapping("/api/auctions/{id}")
 class BidController(val auctionRepo: AuctionRepo){
 
-    @PostMapping(SUBMIT_BID_LINK)
+    @PostMapping("/submitBid")
     fun submitBid(@PathVariable("id") auction: Auction?, @RequestBody bid: Bid) : Bid {
-        // validation code --
-        auction.addBid(bid) // this method is show above, it will queue up the BidAddedEvent
+        // omitted validation code 
+        
+        auction.addBid(bid) // this method is show above and it will queue up the BidAddedEvent
         auctionRepo.save(auction) // Spring Data will detect the BidAddedEvent and raise it here
     }
 
@@ -201,7 +206,8 @@ Now you can react to these just like any other event!
 ```
 @Service
 class BidNotificationService {
-    @EventListener fun highBidderNotif(bidAddedEvent: BidAddedEvent){
+    // notify previous high bidder that they were just out bid
+    @EventListener fun notifyOutbidParties(bidAddedEvent: BidAddedEvent){
         // code ...
     }
 }
