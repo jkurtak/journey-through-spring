@@ -16,15 +16,15 @@ This journey is lightweight on purpose with a lot of external references. It is 
 * [Getting Started](./docs/getting-started)
 * [Understanding the "Magic" of Spring](./docs/spring-magic)
 * [Spring Boot Starters and Extreme Programming](./docs/spring-extreme)
-* Debugging a Spring Application
+* [Debugging a Spring Application](./docs/debug-spring)
 * Spring Core
   * [Inversion of Control (IOC) and Dependency Injection (DI)](./docs/spring-core/ioc-di)
   * [Beans](./docs/spring-core/beans)
   * [Properties, Profiles and Resources](./docs/spring-core/prop-profile-resources)
   * [Events](./docs/spring-core/events)
-  * Validation
-  * Data Binding
-  * Type Conversion
+  * [Validation](./docs/spring-core/validation)
+  * [Data Binding](./docs/spring-core/data-binding)
+  * [Type Conversion](./docs/spring-core/validation)
   * [Spring Expression Language (SpEL)](./docs/spring-core/spel)
   * [Aspect Oriented Programming (AOP)](./docs/spring-core/aop)
 * Testing with Spring
