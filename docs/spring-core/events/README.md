@@ -37,7 +37,7 @@ data class User(
 class UserSignedUpEvent(user: User) : ApplicationEvent(user)
 ```
 
-### Raising Events with ApplicationEventPublisher
+## Raising Events with ApplicationEventPublisher
 Spring provides a convenient means to raise events with [ApplicationEventPubliser](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/ApplicationEventPublisher.html). Inject this into any location where you need to raise events and call publish!
 
 ```kotlin
@@ -57,12 +57,12 @@ class UserService(
 }
 ```
 
-### Listening for Events
+## Listening for Events
 You can listen for events by either implementing the [ApplicationListener](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/ApplicationListener.html) interface or by the [@EventListener](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/event/EventListener.html) annotation. As always don't forget that you class must be a Bean or else Spring will not have any control over it (here we are defining @Service).
 
 Either approach is fine but the interface implementation makes it a bit more obvious and easier to search on. 
 
-#### ApplicationListener Interface
+### ApplicationListener Interface
 ```kotlin
 @Service
 class EmailService : ApplicationListener<UserSignedUpEvent> {
@@ -72,7 +72,7 @@ class EmailService : ApplicationListener<UserSignedUpEvent> {
     }
 }
 ```
-#### @EventListener Annotation
+### @EventListener Annotation
 ```kotlin
 @Service
 class EmailService {
@@ -84,6 +84,19 @@ class EmailService {
     }
 
 }
+```
+
+## Debugging Events
+One option to debug events is have Spring print out useful information for you. There two interesting properties that you can set to print out all the registered EventListeners once at the start of the application, and other to have Spring print everytime it is publishing an event. 
+
+Put these in your **application.properties** file.
+
+```properties
+# Trace the publishing of events (i.e., Publishing event in ...)
+logging.level.org.springframework.context.annotation=TRACE
+
+# Print out all the EventListeners at the start of the application.
+logging.level.org.springframework.context.event.EventListenerMethodProcessor=TRACE
 ```
 
 ## Async Events
@@ -110,19 +123,6 @@ Ordering things is a rather interesting concept with Spring. When you register m
 ](https://stackoverflow.com/questions/30328897/what-is-the-use-of-order-annotation-in-spring)
 * **Read:** [Spring Order Annotation](https://javapapers.com/spring/spring-order-annotation/)
 * **Read:** [Controlling Beans Loading Order](https://www.logicbig.com/tutorials/spring-framework/spring-core/using-depends-on.html)
-
-### Debugging Events
-One option to debug events is have Spring print out useful information for you. There two interesting properties that you can set to print out all the registered EventListeners once at the start of the application, and other to have Spring print everytime it is publishing an event. 
-
-Put these in your **application.properties** file.
-
-```properties
-# Trace the publishing of events (i.e., Publishing event in ...)
-logging.level.org.springframework.context.annotation=TRACE
-
-# Print out all the EventListeners at the start of the application.
-logging.level.org.springframework.context.event.EventListenerMethodProcessor=TRACE
-```
 
 ## Spring Data - Domain Events with @DomainEvents and AbstractAggregateRoot
 [Spring Data](http://projects.spring.io/spring-data/) is one of the foundational projects that many other Spring projects are based on. We'll cover it deeper in another section but there is a really neat feature built-in releated to events.
