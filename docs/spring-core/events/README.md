@@ -114,6 +114,8 @@ Ordering things is a rather interesting concept with Spring. When you register m
 ### Debugging Events
 One option to debug events is have Spring print out useful information for you. There two interesting properties that you can set to print out all the registered EventListeners once at the start of the application, and other to have Spring print everytime it is publishing an event. 
 
+Put these in your **application.properties** file.
+
 ```properties
 # Trace the publishing of events (i.e., Publishing event in ...)
 logging.level.org.springframework.context.annotation=TRACE
@@ -122,10 +124,53 @@ logging.level.org.springframework.context.annotation=TRACE
 logging.level.org.springframework.context.event.EventListenerMethodProcessor=TRACE
 ```
 
-## Domain Events with Spring Data AbstractAggregateRoot
-TODO.
+## Spring Data - Domain Events with @DomainEvents and AbstractAggregateRoot
+[Spring Data](http://projects.spring.io/spring-data/) is one of the foundational projects that many other Spring projects are based on. We'll cover it deeper in another section but there is a really neat feature built-in releated to events.
 
-## Spring Integration
+Spring Data follows the concept of [Domain Driven Design ](https://en.wikipedia.org/wiki/Domain-driven_design) and has a concept called Domain Events. Essentially if you have a managed Entity (a special kinda of Bean related to persistence) then Spring Data will look for a field annotated with [@DomainEvents](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/DomainEvents.html) and automatically publish those events for you when that Entity is acted upon. Spring Data provided a convenient super class for you to extend with this functionality called [AbstractAggregateRoot](https://github.com/spring-projects/spring-data-commons/blob/master/src/main/java/org/springframework/data/domain/AbstractAggregateRoot.java). 
+
+* **Read:** [Domain event publication from aggregate roots](https://spring.io/blog/2017/01/30/what-s-new-in-spring-data-release-ingalls#domain-event-publication-from-aggregate-roots)
+* **Read:** [Publishing domain events from aggregate roots](http://zoltanaltfatter.com/2017/06/09/publishing-domain-events-from-aggregate-roots/)
+
+Let's take an example where you've modeled a bidding system where people can **Bid** on an **Auction**. I'm going to omit all the JPA annotations for simplicity and showcase the DomainEvents only.
+
+Let's define two interesting events:
+
+```kotlin
+class BidRemovedEvent(auction: Auction, var bid: Bid): AuctionEvent(auction)
+class BidAddedEvent(auction: Auction, var bid: Bid): AuctionEvent(auction)
+```
+
+We'll show only the **Auction** class because it has the interesting piece of code related to events:
+
+```kotlin
+@Entity
+data class Auction : AbstractAggregateRoot(){
+    var bids: MutableSet<Bid> = mutableSetOf()
+    
+    /**
+     * Add a new bid to this Auction
+     */
+    fun addBid(bid: Bid): Auction {
+        bid.auction = this
+        bids.add(bid)
+        registerEvent(BidAddedEvent(this, bid)) // this comes from AbstractAggregateRoot
+        return this
+    }
+
+    /**
+     * Remove a bid from this Auction
+     */
+    fun removeBid(bid: Bid): Auction {
+        bids.remove(bid)
+        bid.auction = null
+        registerEvent(BidRemovedEvent(this, bid)) // this comes from AbstractAggregateRoot
+        return this
+    }
+}
+```
+
+## Spring Integration - ApplicationEventListeningMessageProducer
 We cover Spring Integration in another section but it's important to know that it has support for listening to Spring ApplicationEvents with a component called [ApplicationEventListeningMessageProducer](https://docs.spring.io/spring-integration/api/org/springframework/integration/event/inbound/ApplicationEventListeningMessageProducer.html).
 
 * **Read:** [Spring ApplicationEvent Support](https://docs.spring.io/spring-integration/reference/html/applicationevent.html)
