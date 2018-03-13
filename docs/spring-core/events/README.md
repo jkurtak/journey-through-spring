@@ -112,7 +112,15 @@ Ordering things is a rather interesting concept with Spring. When you register m
 * **Read:** [Controlling Beans Loading Order](https://www.logicbig.com/tutorials/spring-framework/spring-core/using-depends-on.html)
 
 ### Debugging Events
-TODO.
+One option to debug events is have Spring print out useful information for you. There two interesting properties that you can set to print out all the registered EventListeners once at the start of the application, and other to have Spring print everytime it is publishing an event. 
+
+```properties
+# Trace the publishing of events (i.e., Publishing event in ...)
+logging.level.org.springframework.context.annotation=TRACE
+
+# Print out all the EventListeners at the start of the application.
+logging.level.org.springframework.context.event.EventListenerMethodProcessor=TRACE
+```
 
 ## Domain Events with Spring Data AbstractAggregateRoot
 TODO.
