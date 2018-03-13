@@ -94,7 +94,7 @@ You can easily make an EventListener asynchronous by using the [@Async](https://
 * **Read:** [Asynchronous Listeners](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#context-functionality-events-async)
 * **Read:** [Spring Async](http://www.baeldung.com/spring-async)
 
-## Transactionl Events
+## Transactional Events
 Transactions are discussed in another section but it's important to understand that they play a role with EventListeners. You have the abilitiy to advise Spring on when and how to run your listeners with respect to transaction that may be going on. To do this you essentially swap out @EventListener with [@TransactionalEventListener](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/event/TransactionalEventListener.html). 
 
 An example of this is would be a MailService listener that should send a welcome E-Mail out only after a user has successfully been commited to the database.
@@ -127,7 +127,7 @@ logging.level.org.springframework.context.event.EventListenerMethodProcessor=TRA
 ## Spring Data - Domain Events with @DomainEvents and AbstractAggregateRoot
 [Spring Data](http://projects.spring.io/spring-data/) is one of the foundational projects that many other Spring projects are based on. We'll cover it deeper in another section but there is a really neat feature built-in releated to events.
 
-Spring Data follows the concept of [Domain Driven Design ](https://en.wikipedia.org/wiki/Domain-driven_design) and has a concept called Domain Events. Essentially if you have a managed Entity (a special kinda of Bean related to persistence) then Spring Data will look for a field annotated with [@DomainEvents](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/DomainEvents.html) and automatically publish those events for you when that Entity is acted upon. Spring Data provided a convenient super class for you to extend with this functionality called [AbstractAggregateRoot](https://github.com/spring-projects/spring-data-commons/blob/master/src/main/java/org/springframework/data/domain/AbstractAggregateRoot.java). 
+Spring Data follows the concept of [Domain Driven Design ](https://en.wikipedia.org/wiki/Domain-driven_design) and has a concept called Domain Events. Essentially if you have a managed Entity (a special kinda of Bean related to persistence) then Spring Data will look for a field annotated with [@DomainEvents](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/DomainEvents.html) and **automatically publishethose events for you when that Entity is acted upon**. Spring Data provided a convenient super class for you to extend with this functionality called [AbstractAggregateRoot](https://github.com/spring-projects/spring-data-commons/blob/master/src/main/java/org/springframework/data/domain/AbstractAggregateRoot.java). 
 
 * **Read:** [Domain event publication from aggregate roots](https://spring.io/blog/2017/01/30/what-s-new-in-spring-data-release-ingalls#domain-event-publication-from-aggregate-roots)
 * **Read:** [Publishing domain events from aggregate roots](http://zoltanaltfatter.com/2017/06/09/publishing-domain-events-from-aggregate-roots/)
@@ -141,9 +141,12 @@ class BidRemovedEvent(auction: Auction, var bid: Bid): AuctionEvent(auction)
 class BidAddedEvent(auction: Auction, var bid: Bid): AuctionEvent(auction)
 ```
 
-We'll show only the **Auction** class because it has the interesting piece of code related to events:
+We'll show only the **Auction** class because it has the interesting piece of code related to events. The 
 
 ```kotlin
+/**
+  * Models an Auction and inherits from AbstractAggregateRoot to leverage DomainEvents.
+  */
 @Entity
 data class Auction : AbstractAggregateRoot(){
     var bids: MutableSet<Bid> = mutableSetOf()
@@ -154,7 +157,12 @@ data class Auction : AbstractAggregateRoot(){
     fun addBid(bid: Bid): Auction {
         bid.auction = this
         bids.add(bid)
-        registerEvent(BidAddedEvent(this, bid)) // this comes from AbstractAggregateRoot
+        
+        // this comes from AbstractAggregateRoot
+        // when called it will put BidAddedEvent into the DomainEvents list and 
+        // Spring Data will raise them automatically when this Entity hits the persistence layer.        
+        registerEvent(BidAddedEvent(this, bid))
+        
         return this
     }
 
@@ -166,6 +174,35 @@ data class Auction : AbstractAggregateRoot(){
         bid.auction = null
         registerEvent(BidRemovedEvent(this, bid)) // this comes from AbstractAggregateRoot
         return this
+    }
+}
+```
+
+Now let's define a Controller to call these methods at the appropriate time. 
+
+```kotlin
+@RestController
+@RequestMapping("/api/auctions/{id}")
+class BidController(val auctionRepo: AuctionRepo){
+
+    @PostMapping(SUBMIT_BID_LINK)
+    fun submitBid(@PathVariable("id") auction: Auction?, @RequestBody bid: Bid) : Bid {
+        // validation code --
+        auction.addBid(bid) // this method is show above, it will queue up the BidAddedEvent
+        auctionRepo.save(auction) // Spring Data will detect the BidAddedEvent and raise it here
+    }
+
+    // other mappings...
+}
+```
+
+Now you can react to these just like any other event!
+
+```
+@Service
+class BidNotificationService {
+    @EventListener fun highBidderNotif(bidAddedEvent: BidAddedEvent){
+        // code ...
     }
 }
 ```
