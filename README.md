@@ -16,6 +16,7 @@ This journey is lightweight on purpose with a lot of external references. It is 
 * [Getting Started](./docs/getting-started)
 * [Understanding the "Magic" of Spring](./docs/spring-magic)
 * [Spring Boot Starters and Extreme Programming](./docs/spring-extreme)
+* [How to Debug](./docs/how-to-debug)
 * Spring Core
   * [Inversion of Control (IOC) and Dependency Injection (DI)](./docs/spring-core/ioc-di)
   * [Beans](./docs/spring-core/beans)
