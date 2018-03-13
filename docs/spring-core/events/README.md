@@ -217,4 +217,27 @@ class BidNotificationService {
 We cover Spring Integration in another section but it's important to know that it has support for listening to Spring ApplicationEvents with a component called [ApplicationEventListeningMessageProducer](https://docs.spring.io/spring-integration/api/org/springframework/integration/event/inbound/ApplicationEventListeningMessageProducer.html).
 
 * **Read:** [Spring ApplicationEvent Support](https://docs.spring.io/spring-integration/reference/html/applicationevent.html)
-TODO - demonstrate.
+
+Here is an example of defining the event producer.
+
+```kotlin
+@Configuration
+class EventsIntegrationConfig {
+
+    /**
+     * Listen for the Bid related events and publishes them on a pub/sub channel.
+     */
+    @Bean
+    fun bidEventsProducer(): ApplicationEventListeningMessageProducer {
+        val producer = ApplicationEventListeningMessageProducer()
+        producer.setEventTypes(
+            BidAddedEvent::class.java,
+            BidUpdatedEvent::class.java,
+            BidRemovedEvent::class.java)
+        producer.setOutputChannelName("bidEventsPubSubChannel")
+        return producer
+    }
+    
+}
+```
+
