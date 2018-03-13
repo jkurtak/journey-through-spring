@@ -20,7 +20,7 @@ The Spring Framework ecosystem is large and overwhelming at a first glance. Befo
 | [@springboot](https://twitter.com/springboot)           | Primary Spring Boot Twitter  |
 
 ### Primary Reference Documentation
-| Link                       | Are                                                       |
+| Link                       | Description                                               |
 | -------------------------- | --------------------------------------------------------- |
 | [Spring Framework Reference](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/index.html)     | Primary reference material for Spring                                      |
 | [Spring Boot Reference](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) | Primary reference material for Spring Boot       |
