@@ -38,7 +38,7 @@ class UserSignedUpEvent(user: User) : ApplicationEvent(user)
 ```
 
 ## Raising Events with ApplicationEventPublisher
-Spring provides a convenient means to raise events with [ApplicationEventPubliser](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/ApplicationEventPublisher.html). Inject this into any location where you need to raise events and call publish!
+Spring provides a convenient means to raise events with [ApplicationEventPublisher](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/ApplicationEventPublisher.html). Inject this into any location where you need to raise events and call publish!
 
 ```kotlin
 @Component
